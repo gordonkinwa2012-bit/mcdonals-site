@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>McDonald's® | Order Online | Official Website</title>
+    <title>McDonald's® | Official Website | Order Online</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
@@ -19,31 +19,40 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
-            transition: background 0.3s ease, color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
-        /* Dark/Light Mode Variables */
+        /* Premium Color Scheme */
         :root {
             --mcd-red: #DA291C;
             --mcd-yellow: #FFBC0D;
             --mcd-gold: #FFC72C;
             --mcd-dark: #1a1a1a;
             --mcd-green: #2E7D32;
+            --mcd-orange: #F5A623;
             --bg-primary: #FDFBF7;
             --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
             --text-primary: #1a1a1a;
             --text-secondary: #666666;
-            --card-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
-            --card-shadow-hover: 0 30px 45px -15px rgba(0,0,0,0.2);
+            --text-muted: #999999;
+            --border-light: #e5e5e5;
+            --shadow-sm: 0 4px 12px rgba(0,0,0,0.05);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 40px rgba(0,0,0,0.15);
+            --shadow-xl: 0 30px 50px rgba(0,0,0,0.2);
             --transition-smooth: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
         body.dark-mode {
             --bg-primary: #121212;
             --bg-secondary: #1e1e1e;
+            --bg-card: #2a2a2a;
             --text-primary: #ffffff;
             --text-secondary: #b0b0b0;
-            --card-shadow: 0 20px 35px -10px rgba(0,0,0,0.3);
+            --text-muted: #808080;
+            --border-light: #333333;
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.3);
         }
 
         /* Custom Scrollbar */
@@ -55,11 +64,11 @@
         /* Header */
         header {
             background: var(--mcd-red);
-            padding: 0.8rem 5%;
+            padding: 1rem 5%;
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-md);
         }
 
         nav {
@@ -79,26 +88,23 @@
             font-weight: 800;
             color: var(--mcd-yellow);
             text-decoration: none;
-            transition: transform 0.3s;
         }
-
-        .logo:hover { transform: scale(1.02); }
 
         .logo-icon {
             background: white;
-            width: 42px;
-            height: 42px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.6rem;
-            animation: bounce 2s infinite;
+            font-size: 1.8rem;
+            animation: pulse 2s infinite;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .nav-links {
@@ -112,17 +118,16 @@
             text-decoration: none;
             font-weight: 600;
             transition: var(--transition-smooth);
-            font-size: 1rem;
             position: relative;
         }
 
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -8px;
             left: 0;
             width: 0;
-            height: 2px;
+            height: 3px;
             background: var(--mcd-yellow);
             transition: width 0.3s;
         }
@@ -132,22 +137,17 @@
             width: 100%;
         }
 
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--mcd-yellow);
-        }
-
-        /* Header Actions */
         .header-actions {
             display: flex;
             gap: 15px;
             align-items: center;
         }
 
-        .theme-toggle {
+        .theme-toggle, .search-toggle {
             background: rgba(255,255,255,0.2);
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             cursor: pointer;
             color: white;
@@ -155,16 +155,16 @@
             transition: var(--transition-smooth);
         }
 
-        .theme-toggle:hover {
+        .theme-toggle:hover, .search-toggle:hover {
             background: rgba(255,255,255,0.3);
-            transform: rotate(15deg);
+            transform: scale(1.05);
         }
 
         .cart-icon {
             background: rgba(255,255,255,0.2);
             border: none;
-            padding: 10px 22px;
-            border-radius: 40px;
+            padding: 10px 24px;
+            border-radius: 50px;
             color: white;
             font-weight: 600;
             cursor: pointer;
@@ -192,7 +192,31 @@
             font-weight: bold;
         }
 
-        /* Hero Section with 3D Parallax */
+        /* Search Bar */
+        .search-bar {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            padding: 0 1rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 24px;
+            border: 2px solid var(--border-light);
+            border-radius: 50px;
+            font-size: 1rem;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: var(--transition-smooth);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--mcd-red);
+            box-shadow: 0 0 0 3px rgba(218,41,28,0.1);
+        }
+
+        /* Hero Section Premium */
         .hero {
             position: relative;
             height: 85vh;
@@ -205,7 +229,7 @@
             width: 100%;
             height: 100%;
             opacity: 0;
-            transition: opacity 1.2s ease-in-out;
+            transition: opacity 1.2s ease;
             background-size: cover;
             background-position: center;
             display: flex;
@@ -224,27 +248,18 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%);
+            background: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 100%);
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
-            background: rgba(0,0,0,0.45);
-            padding: 2.5rem;
-            border-radius: 40px;
-            backdrop-filter: blur(12px);
-            animation: fadeInUp 0.8s ease;
             max-width: 80%;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            animation: fadeInUp 0.8s ease;
         }
 
         .hero-content h1 {
-            font-size: 4rem;
+            font-size: 4.5rem;
             margin-bottom: 1rem;
             color: white;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
@@ -256,29 +271,28 @@
             color: rgba(255,255,255,0.95);
         }
 
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Buttons */
         .btn-primary {
             background: var(--mcd-red);
             color: white;
-            padding: 14px 38px;
+            padding: 14px 40px;
             border: none;
             border-radius: 50px;
             font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
             transition: var(--transition-smooth);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: var(--shadow-sm);
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(218,41,28,0.4);
+            box-shadow: var(--shadow-md);
             background: #b91c10;
         }
 
@@ -357,7 +371,35 @@
             border-radius: 2px;
         }
 
-        /* Menu Grid with 3D Cards */
+        /* Category Quick Links */
+        .category-strip {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .category-pill {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-light);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            color: var(--text-primary);
+        }
+
+        .category-pill:hover,
+        .category-pill.active {
+            background: var(--mcd-red);
+            border-color: var(--mcd-red);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Menu Grid Premium */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -365,10 +407,10 @@
         }
 
         .menu-card {
-            background: var(--bg-secondary);
+            background: var(--bg-card);
             border-radius: 32px;
             overflow: hidden;
-            box-shadow: var(--card-shadow);
+            box-shadow: var(--shadow-md);
             transition: var(--transition-smooth);
             cursor: pointer;
             position: relative;
@@ -376,7 +418,7 @@
 
         .menu-card:hover {
             transform: translateY(-12px);
-            box-shadow: var(--card-shadow-hover);
+            box-shadow: var(--shadow-xl);
         }
 
         .card-badge {
@@ -385,18 +427,20 @@
             right: 15px;
             background: var(--mcd-yellow);
             color: var(--mcd-red);
-            padding: 5px 12px;
-            border-radius: 20px;
+            padding: 6px 14px;
+            border-radius: 25px;
             font-size: 0.7rem;
             font-weight: bold;
             z-index: 5;
+            box-shadow: var(--shadow-sm);
         }
 
         .img-wrapper {
             width: 100%;
-            height: 250px;
+            height: 260px;
             overflow: hidden;
             position: relative;
+            background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
         }
 
         .menu-img {
@@ -408,6 +452,15 @@
 
         .menu-card:hover .menu-img {
             transform: scale(1.1);
+        }
+
+        .fallback-emoji {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-size: 5rem;
+            background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
         }
 
         .menu-info {
@@ -440,6 +493,13 @@
             color: var(--mcd-red);
         }
 
+        .price-old {
+            font-size: 1rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+            margin-left: 8px;
+        }
+
         .rating {
             color: #FFB800;
             font-size: 0.9rem;
@@ -467,7 +527,7 @@
             transform: scale(1.02);
         }
 
-        /* Deals Section with Countdown Timer */
+        /* Deals Section Premium */
         .deals-section {
             background: linear-gradient(135deg, var(--mcd-red) 0%, #8B1A10 100%);
             padding: 5rem 5%;
@@ -476,20 +536,13 @@
         }
 
         .deals-section::before {
-            content: "🍔🍟🥤🍦";
+            content: "🍔🍟🥤🍦🍗🥚";
             position: absolute;
-            font-size: 15rem;
+            font-size: 18rem;
             opacity: 0.05;
-            bottom: -50px;
-            right: -50px;
-        }
-
-        .deals-section .section-header h2 {
-            color: white;
-        }
-
-        .deals-section .section-header p {
-            color: rgba(255,255,255,0.85);
+            bottom: -80px;
+            right: -80px;
+            white-space: nowrap;
         }
 
         .deals-container {
@@ -497,7 +550,7 @@
             justify-content: center;
             gap: 2rem;
             flex-wrap: wrap;
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -515,6 +568,7 @@
 
         .deal-card:hover {
             transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-xl);
         }
 
         .deal-card::after {
@@ -527,12 +581,37 @@
             background: var(--mcd-yellow);
         }
 
-        .deal-emoji { font-size: 3rem; margin-bottom: 0.5rem; }
-        .deal-badge { background: var(--mcd-yellow); padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; display: inline-block; margin-bottom: 1rem; }
-        .deal-card h3 { font-size: 2rem; color: var(--mcd-red); margin-bottom: 0.5rem; }
-        .countdown { background: var(--mcd-dark); color: white; padding: 8px; border-radius: 30px; margin-top: 1rem; font-size: 0.8rem; }
+        .deal-emoji {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
 
-        /* Location Section with Map */
+        .deal-badge {
+            background: var(--mcd-yellow);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .deal-card h3 {
+            font-size: 2rem;
+            color: var(--mcd-red);
+            margin-bottom: 0.5rem;
+        }
+
+        .countdown {
+            background: var(--mcd-dark);
+            color: white;
+            padding: 8px;
+            border-radius: 30px;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+        }
+
+        /* Location Section */
         .locator-section {
             background: linear-gradient(135deg, #F0EDE6, #E8E4DC);
             padding: 5rem 5%;
@@ -556,17 +635,46 @@
             min-width: 280px;
         }
 
-        .locator-form h3 { font-size: 1.5rem; color: var(--mcd-red); margin-bottom: 1rem; }
-        .input-group { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 1.5rem; }
-        .input-group input { flex: 1; padding: 14px 20px; border: 2px solid #ddd; border-radius: 50px; font-size: 1rem; transition: 0.3s; background: white; }
-        .input-group input:focus { outline: none; border-color: var(--mcd-red); }
-        .location-results { margin-top: 1.5rem; background: white; border-radius: 20px; padding: 1rem; }
+        .locator-form h3 {
+            font-size: 1.5rem;
+            color: var(--mcd-red);
+            margin-bottom: 1rem;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 14px 20px;
+            border: 2px solid var(--border-light);
+            border-radius: 50px;
+            font-size: 1rem;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--mcd-red);
+        }
+
+        .location-results {
+            margin-top: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 1rem;
+        }
 
         .map-placeholder {
             flex: 1;
             background: linear-gradient(135deg, #ddd, #ccc);
             border-radius: 28px;
-            height: 300px;
+            height: 320px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -586,25 +694,29 @@
             background: linear-gradient(135deg, #FFE8B5, var(--bg-primary));
         }
 
-        .menu-header h1 { font-size: 2.8rem; color: var(--mcd-red); }
+        .menu-header h1 {
+            font-size: 3rem;
+            color: var(--mcd-red);
+        }
 
-        /* Tabs */
+        /* Tabs Premium */
         .tabs {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 0.8rem;
             flex-wrap: wrap;
             padding: 2rem 5%;
             position: sticky;
-            top: 70px;
+            top: 80px;
             background: var(--bg-primary);
             z-index: 99;
+            border-bottom: 1px solid var(--border-light);
         }
 
         .tab {
             background: var(--bg-secondary);
             border: 2px solid var(--mcd-red);
-            padding: 10px 28px;
+            padding: 12px 32px;
             border-radius: 50px;
             font-weight: 700;
             cursor: pointer;
@@ -616,16 +728,17 @@
             background: var(--mcd-red);
             color: white;
             transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
         }
 
-        /* Cart Sidebar */
+        /* Cart Sidebar Premium */
         .cart-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.7);
             z-index: 2000;
             display: none;
             backdrop-filter: blur(5px);
@@ -633,7 +746,7 @@
 
         .cart-sidebar {
             position: fixed;
-            right: -480px;
+            right: -500px;
             top: 0;
             width: 450px;
             height: 100vh;
@@ -642,7 +755,7 @@
             transition: 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             display: flex;
             flex-direction: column;
-            box-shadow: -10px 0 40px rgba(0,0,0,0.2);
+            box-shadow: -10px 0 40px rgba(0,0,0,0.3);
         }
 
         .cart-sidebar.open {
@@ -669,7 +782,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 1px solid var(--border-light);
         }
 
         .cart-footer {
@@ -710,7 +823,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.8);
             z-index: 3000;
             display: none;
             align-items: center;
@@ -721,7 +834,7 @@
             background: var(--bg-secondary);
             border-radius: 32px;
             padding: 2rem;
-            max-width: 450px;
+            max-width: 500px;
             width: 90%;
             text-align: center;
         }
@@ -736,10 +849,25 @@
             text-align: center;
             flex: 1;
         }
-        .step .dot { width: 40px; height: 40px; background: #ddd; border-radius: 50%; margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; }
-        .step.active .dot { background: var(--mcd-green); color: white; }
-        .step .label { font-size: 0.7rem; }
 
+        .step .dot {
+            width: 45px;
+            height: 45px;
+            background: var(--border-light);
+            border-radius: 50%;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .step.active .dot {
+            background: var(--mcd-green);
+            color: white;
+        }
+
+        /* Toast Notification */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -752,7 +880,7 @@
             z-index: 4000;
             font-weight: 600;
             animation: slideUp 0.3s ease;
-            box-shadow: var(--card-shadow);
+            box-shadow: var(--shadow-lg);
         }
 
         @keyframes slideUp {
@@ -760,6 +888,7 @@
             to { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
 
+        /* Scroll Top */
         .scroll-top {
             position: fixed;
             bottom: 30px;
@@ -777,12 +906,18 @@
             transition: var(--transition-smooth);
             z-index: 99;
             border: none;
-            box-shadow: var(--card-shadow);
+            box-shadow: var(--shadow-lg);
         }
 
-        .scroll-top.visible { opacity: 1; }
-        .hidden { display: none; }
+        .scroll-top.visible {
+            opacity: 1;
+        }
 
+        .hidden {
+            display: none;
+        }
+
+        /* Footer */
         footer {
             background: var(--mcd-dark);
             color: white;
@@ -797,18 +932,46 @@
             flex-wrap: wrap;
             margin-bottom: 1.5rem;
         }
-        .footer-links a { color: #ccc; text-decoration: none; transition: 0.3s; }
-        .footer-links a:hover { color: var(--mcd-yellow); }
-        .social-icons a { color: white; margin: 0 12px; font-size: 1.3rem; transition: 0.3s; display: inline-block; }
-        .social-icons a:hover { color: var(--mcd-yellow); transform: translateY(-3px); }
 
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--mcd-yellow);
+        }
+
+        .social-icons a {
+            color: white;
+            margin: 0 12px;
+            font-size: 1.3rem;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .social-icons a:hover {
+            color: var(--mcd-yellow);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
             .hero { height: 70vh; }
             .hero-content h1 { font-size: 2rem; }
             .nav-links { gap: 1rem; }
             .cart-sidebar { width: 100%; right: -100%; }
             .section-header h2 { font-size: 1.8rem; }
+            .tabs { top: 70px; }
             .scroll-top { bottom: 20px; right: 20px; width: 42px; height: 42px; }
+            .menu-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 { font-size: 1.5rem; }
+            .btn-primary, .btn-outline { padding: 10px 20px; font-size: 0.9rem; }
+            .section { padding: 3rem 4%; }
         }
     </style>
 </head>
@@ -827,9 +990,8 @@
             <li><a href="#" onclick="scrollToLocator()">Locations</a></li>
         </ul>
         <div class="header-actions">
-            <button class="theme-toggle" onclick="toggleDarkMode()" id="themeBtn">
-                <i class="fas fa-moon"></i>
-            </button>
+            <button class="search-toggle" onclick="toggleSearch()"><i class="fas fa-search"></i></button>
+            <button class="theme-toggle" onclick="toggleDarkMode()"><i class="fas fa-moon"></i></button>
             <button class="cart-icon" onclick="toggleCart()">
                 <i class="fas fa-bag-shopping"></i>
                 <span class="cart-count" id="cartCount">0</span>
@@ -842,105 +1004,234 @@
 <div class="hero" id="heroSlider">
     <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=1600&h=800&fit=crop')">
         <div class="hero-overlay"></div>
-        <div class="hero-content"><h1>Big Mac®</h1><p>Two all-beef patties, special sauce, lettuce, cheese</p><div class="hero-buttons"><button class="btn-primary" onclick="showMenu()">Order Now</button><button class="btn-outline" onclick="showMenu()">View Menu</button></div></div>
+        <div class="hero-content">
+            <h1>Big Mac®</h1>
+            <p>Two all-beef patties, special sauce, lettuce, cheese, pickles, onions</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="showMenu()">Order Now</button>
+                <button class="btn-outline" onclick="showMenu()">View Menu</button>
+            </div>
+        </div>
     </div>
     <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1562967914-608f82629710?w=1600&h=800&fit=crop')">
         <div class="hero-overlay"></div>
-        <div class="hero-content"><h1>Chicken McNuggets®</h1><p>Juicy, crispy, delicious</p><div class="hero-buttons"><button class="btn-primary" onclick="showMenu()">Order Now</button><button class="btn-outline" onclick="showMenu()">View Menu</button></div></div>
+        <div class="hero-content">
+            <h1>Chicken McNuggets®</h1>
+            <p>Juicy, crispy, delicious chicken nuggets</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="showMenu()">Order Now</button>
+                <button class="btn-outline" onclick="showMenu()">Shop Now</button>
+            </div>
+        </div>
     </div>
     <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=1600&h=800&fit=crop')">
         <div class="hero-overlay"></div>
-        <div class="hero-content"><h1>World Famous Fries</h1><p>Golden, crispy, salted to perfection</p><div class="hero-buttons"><button class="btn-primary" onclick="showMenu()">Order Now</button><button class="btn-outline" onclick="showMenu()">View Menu</button></div></div>
+        <div class="hero-content">
+            <h1>World Famous Fries</h1>
+            <p>Golden, crispy, salted to perfection</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="showMenu()">Order Now</button>
+                <button class="btn-outline" onclick="showMenu()">Learn More</button>
+            </div>
+        </div>
     </div>
     <div class="slider-controls" id="sliderDots"></div>
 </div>
 
 <!-- Home Page -->
 <div id="homePage">
+    <!-- Search Bar -->
+    <div class="search-bar" id="searchBar" style="display: none;">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search menu items... (e.g., Big Mac, Fries, Nuggets)" onkeyup="searchMenu()">
+    </div>
+
     <section class="section">
-        <div class="section-header"><h2>🔥 Most Popular</h2><p>Customer favorites loved by millions</p><div class="underline"></div></div>
+        <div class="section-header">
+            <h2>🔥 Most Popular</h2>
+            <p>Customer favorites loved by millions worldwide</p>
+            <div class="underline"></div>
+        </div>
         <div class="menu-grid" id="featuredGrid"></div>
     </section>
 
     <section class="deals-section" id="dealsSection">
-        <div class="section-header"><h2>🎉 Limited Time Offers</h2><p>Grab these deals before they're gone!</p><div class="underline" style="background: white;"></div></div>
+        <div class="section-header">
+            <h2 style="color: white;">🎉 Limited Time Offers</h2>
+            <p style="color: rgba(255,255,255,0.9);">Grab these deals before they're gone!</p>
+            <div class="underline" style="background: white;"></div>
+        </div>
         <div class="deals-container" id="dealsContainer"></div>
     </section>
 
     <section class="locator-section" id="locatorSection">
         <div class="locator-wrapper">
             <div class="locator-form">
-                <h3><i class="fas fa-map-pin"></i> Find Your Nearest Store</h3>
-                <p>Enter your ZIP code to find the closest McDonald's</p>
-                <div class="input-group"><input type="text" id="zipInput" placeholder="Enter ZIP code"><button class="btn-primary" onclick="findLocation()"><i class="fas fa-search"></i> Search</button></div>
+                <h3><i class="fas fa-map-pin"></i> Find Your Nearest McDonald's</h3>
+                <p>Enter your location to find the closest store</p>
+                <div class="input-group">
+                    <input type="text" id="zipInput" placeholder="Enter ZIP code or city">
+                    <button class="btn-primary" onclick="findLocation()"><i class="fas fa-search"></i> Search</button>
+                </div>
                 <div id="locationResults" class="location-results"></div>
             </div>
-            <div class="map-placeholder"><i class="fas fa-map-marked-alt" style="font-size: 3rem; color: var(--mcd-red);"></i><p style="position: absolute; bottom: 20px;">📍 50,000+ locations worldwide</p></div>
+            <div class="map-placeholder">
+                <i class="fas fa-map-marked-alt" style="font-size: 3rem; color: var(--mcd-red);"></i>
+                <p style="position: absolute; bottom: 20px;">📍 50,000+ locations worldwide</p>
+            </div>
         </div>
     </section>
 </div>
 
 <!-- Menu Page -->
 <div id="menuPage" class="menu-page hidden">
-    <div class="menu-header"><h1>🍔 Our Full Menu 🍟</h1><p>Freshly prepared just for you</p></div>
+    <div class="menu-header">
+        <h1>🍔 Our Full Menu 🍟</h1>
+        <p>Freshly prepared just for you, every single day</p>
+    </div>
     <div class="tabs" id="tabsContainer"></div>
-    <div class="section"><div class="menu-grid" id="fullMenuGrid"></div></div>
+    <div class="section">
+        <div class="menu-grid" id="fullMenuGrid"></div>
+    </div>
 </div>
 
 <!-- Cart Sidebar -->
 <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
 <div class="cart-sidebar" id="cartSidebar">
-    <div class="cart-header"><h3><i class="fas fa-bag-shopping"></i> Your Order</h3><button onclick="toggleCart()" style="background:none; border:none; color:white; font-size:1.5rem;">✕</button></div>
-    <div class="cart-items" id="cartItemsList"><p style="color:#999; text-align:center; padding:2rem;">Your cart is empty</p></div>
-    <div class="cart-footer"><div class="cart-total"><span>Subtotal:</span><span id="cartSubtotal">$0.00</span></div><div class="cart-total"><span>Tax (10%):</span><span id="cartTax">$0.00</span></div><div class="cart-total" style="border-top: 2px solid var(--mcd-yellow); padding-top: 0.8rem;"><span><strong>Total:</strong></span><span><strong id="cartTotal">$0.00</strong></span></div><button class="checkout-btn" onclick="checkout()"><i class="fas fa-credit-card"></i> Proceed to Checkout</button></div>
+    <div class="cart-header">
+        <h3><i class="fas fa-bag-shopping"></i> Your Order</h3>
+        <button onclick="toggleCart()" style="background:none; border:none; color:white; font-size:1.8rem;">✕</button>
+    </div>
+    <div class="cart-items" id="cartItemsList">
+        <p style="color:#999; text-align:center; padding:2rem;">Your cart is empty</p>
+    </div>
+    <div class="cart-footer">
+        <div class="cart-total"><span>Subtotal:</span><span id="cartSubtotal">$0.00</span></div>
+        <div class="cart-total"><span>Tax (10%):</span><span id="cartTax">$0.00</span></div>
+        <div class="cart-total" style="border-top: 2px solid var(--mcd-yellow); padding-top: 0.8rem;">
+            <span><strong>Total:</strong></span>
+            <span><strong id="cartTotal">$0.00</strong></span>
+        </div>
+        <button class="checkout-btn" onclick="checkout()"><i class="fas fa-credit-card"></i> Proceed to Checkout</button>
+    </div>
 </div>
 
 <!-- Order Tracking Modal -->
-<div class="modal" id="trackingModal"><div class="modal-content"><h2 style="color: var(--mcd-red);">🍔 Order Status</h2><div class="tracking-steps"><div class="step active"><div class="dot">✓</div><div class="label">Order Placed</div></div><div class="step"><div class="dot">🍳</div><div class="label">Preparing</div></div><div class="step"><div class="dot">🛵</div><div class="label">On The Way</div></div><div class="step"><div class="dot">🏠</div><div class="label">Delivered</div></div></div><p id="trackingMessage">Your order has been confirmed!</p><button class="btn-primary" onclick="closeTracking()" style="margin-top:1rem;">Track Order</button></div></div>
+<div class="modal" id="trackingModal">
+    <div class="modal-content">
+        <h2 style="color: var(--mcd-red);">🍔 Order Status</h2>
+        <div class="tracking-steps">
+            <div class="step active"><div class="dot">✓</div><div class="label">Placed</div></div>
+            <div class="step"><div class="dot">🍳</div><div class="label">Preparing</div></div>
+            <div class="step"><div class="dot">🛵</div><div class="label">On The Way</div></div>
+            <div class="step"><div class="dot">🏠</div><div class="label">Delivered</div></div>
+        </div>
+        <p id="trackingMessage">Your order has been confirmed! Estimated delivery: 15-20 min</p>
+        <button class="btn-primary" onclick="closeTracking()" style="margin-top:1rem;">Track Order</button>
+    </div>
+</div>
 
 <!-- Scroll to Top -->
-<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
+<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="fas fa-arrow-up"></i>
+</button>
 
 <footer>
-    <div class="footer-links"><a href="#">About Us</a><a href="#">Careers</a><a href="#">Nutrition</a><a href="#">Gift Cards</a><a href="#">Contact</a></div>
-    <div class="social-icons"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-tiktok"></i></a></div>
+    <div class="footer-links">
+        <a href="#">About Us</a>
+        <a href="#">Careers</a>
+        <a href="#">Nutrition</a>
+        <a href="#">Gift Cards</a>
+        <a href="#">Contact</a>
+        <a href="#">Privacy Policy</a>
+    </div>
+    <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-tiktok"></i></a>
+        <a href="#"><i class="fab fa-snapchat"></i></a>
+    </div>
     <p>© 2025 McDonald's. All rights reserved. | Serving happiness since 1955</p>
-    <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.7;"><i class="fas fa-mobile-alt"></i> Download our app for exclusive deals!</p>
+    <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.7;">
+        <i class="fas fa-mobile-alt"></i> Download our app for exclusive deals! 
+        <i class="fas fa-apple"></i> <i class="fab fa-android"></i>
+    </p>
 </footer>
 
 <script>
-    // ULTIMATE MENU DATABASE - 24 ITEMS WITH HIGH QUALITY IMAGES
+    // ==================== ULTIMATE MENU DATABASE - 55+ ITEMS ====================
     const menuDB = [
-        { name: "Big Mac", category: "Burgers", price: 5.99, desc: "Two all-beef patties, special sauce, lettuce, cheese, pickles, onions on a sesame seed bun.", rating: 4.9, img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&h=350&fit=crop" },
-        { name: "Quarter Pounder", category: "Burgers", price: 6.29, desc: "¼ lb of 100% fresh beef, topped with slivered onions, tangy pickles, ketchup, mustard.", rating: 4.8, img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500&h=350&fit=crop" },
-        { name: "Double Cheeseburger", category: "Burgers", price: 4.19, desc: "Two patties with double cheese, pickles, onions, ketchup, mustard.", rating: 4.7, img: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=500&h=350&fit=crop" },
-        { name: "McDouble", category: "Burgers", price: 3.49, desc: "Two patties with cheese, pickles, onions, ketchup, mustard.", rating: 4.6, img: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=500&h=350&fit=crop" },
-        { name: "Bacon Burger", category: "Burgers", price: 5.49, desc: "Beef patty with crispy bacon, cheese, lettuce, tomato.", rating: 4.8, img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=500&h=350&fit=crop" },
-        { name: "10pc McNuggets", category: "Chicken", price: 4.99, desc: "10 juicy, tender chicken nuggets. Perfect with your favorite dipping sauce.", rating: 4.8, img: "https://images.unsplash.com/photo-1562967914-608f82629710?w=500&h=350&fit=crop" },
-        { name: "20pc McNuggets", category: "Chicken", price: 7.99, desc: "20 nuggets - great for sharing! Choose up to 2 sauces.", rating: 4.9, img: "https://images.unsplash.com/photo-1562967914-608f82629710?w=500&h=350&fit=crop" },
-        { name: "McChicken", category: "Chicken", price: 4.29, desc: "Crispy chicken patty with shredded lettuce and creamy mayo.", rating: 4.7, img: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=500&h=350&fit=crop" },
-        { name: "Spicy McChicken", category: "Chicken", price: 4.49, desc: "Spicy crispy chicken with lettuce and mayo.", rating: 4.8, img: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=500&h=350&fit=crop" },
-        { name: "French Fries", category: "Sides", price: 2.49, desc: "World famous golden fries, crispy outside, fluffy inside.", rating: 4.9, img: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=500&h=350&fit=crop" },
-        { name: "Large Fries", category: "Sides", price: 3.29, desc: "Extra large shareable fries.", rating: 4.8, img: "https://images.unsplash.com/photo-1585109649139-366815a0d713?w=500&h=350&fit=crop" },
-        { name: "Soft Drink", category: "Sides", price: 1.99, desc: "Coca-Cola, Sprite, Fanta, Dr Pepper.", rating: 4.6, img: "https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=500&h=350&fit=crop" },
-        { name: "Milkshake", category: "Sides", price: 3.49, desc: "Chocolate, Vanilla, or Strawberry. Thick and creamy.", rating: 4.8, img: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=500&h=350&fit=crop" },
-        { name: "Oreo McFlurry", category: "Desserts", price: 3.29, desc: "Vanilla soft serve with crushed Oreo pieces.", rating: 4.9, img: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=500&h=350&fit=crop" },
-        { name: "M&Ms McFlurry", category: "Desserts", price: 3.29, desc: "Vanilla with colorful M&M's candies.", rating: 4.8, img: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=500&h=350&fit=crop" },
-        { name: "Apple Pie", category: "Desserts", price: 1.99, desc: "Warm, crispy apple pie with cinnamon sugar.", rating: 4.7, img: "https://images.unsplash.com/photo-1621743478914-cc8a86d7e9d8?w=500&h=350&fit=crop" },
-        { name: "Soft Serve Cone", category: "Desserts", price: 1.29, desc: "Classic vanilla soft serve in a crispy cone.", rating: 4.8, img: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=500&h=350&fit=crop" },
-        { name: "Chocolate Cookie", category: "Desserts", price: 0.99, desc: "Freshly baked chocolate chip cookie.", rating: 4.6, img: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=500&h=350&fit=crop" },
-        { name: "Egg McMuffin", category: "Breakfast", price: 4.29, desc: "Fresh egg, Canadian bacon, cheese on English muffin.", rating: 4.8, img: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=500&h=350&fit=crop" },
-        { name: "Sausage McMuffin", category: "Breakfast", price: 3.99, desc: "Savory sausage patty with cheese.", rating: 4.7, img: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=500&h=350&fit=crop" },
-        { name: "Hotcakes", category: "Breakfast", price: 4.99, desc: "Three fluffy hotcakes with butter and syrup.", rating: 4.8, img: "https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=500&h=350&fit=crop" },
-        { name: "Hash Browns", category: "Breakfast", price: 1.79, desc: "Crispy golden hash browns.", rating: 4.7, img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=500&h=350&fit=crop" },
-        { name: "Breakfast Burrito", category: "Breakfast", price: 3.99, desc: "Eggs, sausage, cheese, peppers in a tortilla.", rating: 4.6, img: "https://images.unsplash.com/photo-1627662051046-31f31a23a730?w=500&h=350&fit=crop" }
+        // === BURGERS (8 items) ===
+        { name: "Big Mac", category: "Burgers", price: 5.99, desc: "Two all-beef patties, special sauce, lettuce, cheese, pickles, onions on a sesame seed bun.", rating: 4.9, img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&h=350&fit=crop", tags: ["popular", "lunch", "dinner"] },
+        { name: "Quarter Pounder with Cheese", category: "Burgers", price: 6.29, desc: "¼ lb of 100% fresh beef, topped with slivered onions, tangy pickles, ketchup, mustard.", rating: 4.8, img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500&h=350&fit=crop", tags: ["popular", "lunch", "dinner"] },
+        { name: "Double Quarter Pounder", category: "Burgers", price: 7.49, desc: "Two ¼ lb patties with double cheese, onions, pickles, ketchup, mustard.", rating: 4.9, img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500&h=350&fit=crop", tags: ["lunch", "dinner"] },
+        { name: "Double Cheeseburger", category: "Burgers", price: 4.19, desc: "Two patties with double cheese, pickles, onions, ketchup, mustard.", rating: 4.7, img: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=500&h=350&fit=crop", tags: ["lunch", "dinner"] },
+        { name: "McDouble", category: "Burgers", price: 3.49, desc: "Two patties with cheese, pickles, onions, ketchup, mustard.", rating: 4.6, img: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=500&h=350&fit=crop", tags: ["lunch", "dinner"] },
+        { name: "Bacon McDouble", category: "Burgers", price: 4.49, desc: "McDouble with crispy bacon added.", rating: 4.8, img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=500&h=350&fit=crop", tags: ["lunch", "dinner"] },
+        { name: "Cheeseburger", category: "Burgers", price: 2.49, desc: "Classic cheeseburger with pickles, onions, ketchup, mustard.", rating: 4.5, img: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=500&h=350&fit=crop", tags: ["kids", "lunch"] },
+        { name: "Hamburger", category: "Burgers", price: 1.99, desc: "Classic hamburger with pickles, onions, ketchup, mustard.", rating: 4.4, img: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=500&h=350&fit=crop", tags: ["kids"] },
+        
+        // === CHICKEN & SANDWICHES (9 items) ===
+        { name: "10pc Chicken McNuggets", category: "Chicken", price: 4.99, desc: "10 juicy, tender chicken nuggets. Perfect with your favorite dipping sauce.", rating: 4.8, img: "https://images.unsplash.com/photo-1562967914-608f82629710?w=500&h=350&fit=crop", tags: ["popular", "lunch", "dinner", "kids"] },
+        { name: "20pc Chicken McNuggets", category: "Chicken", price: 7.99, desc: "20 nuggets - great for sharing! Choose up to 2 sauces.", rating: 4.9, img: "https://images.unsplash.com/photo-1562967914-608f82629710?w=500&h=350&fit=crop", tags: ["popular", "lunch", "dinner"] },
+        { name: "40pc Chicken McNuggets", category: "Chicken", price: 14.99, desc: "40 nuggets - perfect for parties and family gatherings!", rating: 4.9, img: "https://images.unsplash.com/photo-1562967914-608f82629710?w=500&h=350&fit=crop", tags: ["family", "dinner"] },
+        { name: "McChicken", category: "Chicken", price: 4.29, desc: "Crispy chicken patty with shredded lettuce and creamy mayo.", rating: 4.7, img: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=500&h=350&fit=crop", tags: ["lunch", "dinner"] },
+        { name: "Spicy McChicken", category: "Chicken", price: 4.49, desc: "Spicy crispy chicken with lettuce and mayo.", rating: 4.8, img: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=500&h=350&fit=crop", tags: ["lunch", "dinner"] },
+        { name: "Crispy Chicken Sandwich", category: "Chicken", price: 5.49, desc: "Buttermilk crispy chicken, pickles, butter on a potato roll.", rating: 4.7, img: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=500&h=350&fit=crop", tags: ["lunch", "dinner"] },
+        { name: "Deluxe Crispy Chicken", category: "Chicken", price: 5.99, desc: "Crispy chicken with lettuce, tomato, mayo on a brioche bun.", rating: 4.8, img: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=500&h=350&fit=crop", tags: ["lunch", "dinner"] },
+        { name: "Spicy Deluxe Chicken", category: "Chicken", price: 6.19, desc: "Spicy chicken with lettuce, tomato, mayo on a brioche bun.", rating: 4.8, img: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=500&h=350&fit=crop", tags: ["lunch", "dinner"] },
+        
+        // === SIDES (9 items) ===
+        { name: "World Famous Fries", category: "Sides", price: 2.49, desc: "Golden, crispy, salted to perfection.", rating: 4.9, img: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=500&h=350&fit=crop", tags: ["popular", "lunch", "dinner"] },
+        { name: "Large Fries", category: "Sides", price: 3.29, desc: "Extra large shareable fries.", rating: 4.8, img: "https://images.unsplash.com/photo-1585109649139-366815a0d713?w=500&h=350&fit=crop", tags: ["lunch", "dinner"] },
+        { name: "Small Fries", category: "Sides", price: 1.79, desc: "Classic small fries.", rating: 4.7, img: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=500&h=350&fit=crop", tags: ["kids"] },
+        { name: "Soft Drink", category: "Sides", price: 1.99, desc: "Coca-Cola, Sprite, Fanta, Dr Pepper, Diet Coke.", rating: 4.6, img: "https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=500&h=350&fit=crop", tags: ["lunch", "dinner"] },
+        { name: "Large Soft Drink", category: "Sides", price: 2.49, desc: "Large size - 32oz of your favorite soda.", rating: 4.7, img: "https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=500&h=350&fit=crop", tags: ["lunch", "dinner"] },
+        { name: "Milkshake", category: "Sides", price: 3.49, desc: "Chocolate, Vanilla, or Strawberry. Thick and creamy.", rating: 4.8, img: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=500&h=350&fit=crop", tags: ["popular"] },
+        { name: "Side Salad", category: "Sides", price: 2.99, desc: "Fresh mix of greens with grape tomatoes and carrots.", rating: 4.5, img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&h=350&fit=crop", tags: ["healthy"] },
+        { name: "Apple Slices", category: "Sides", price: 1.29, desc: "Fresh cut apple slices - healthy and delicious.", rating: 4.6, img: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=500&h=350&fit=crop", tags: ["kids", "healthy"] },
+        
+        // === DESSERTS (8 items) ===
+        { name: "Oreo McFlurry", category: "Desserts", price: 3.29, desc: "Vanilla soft serve with crushed Oreo pieces.", rating: 4.9, img: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=500&h=350&fit=crop", tags: ["popular"] },
+        { name: "M&Ms McFlurry", category: "Desserts", price: 3.29, desc: "Vanilla with colorful M&M's candies.", rating: 4.8, img: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=500&h=350&fit=crop", tags: ["popular"] },
+        { name: "Chocolate McFlurry", category: "Desserts", price: 3.49, desc: "Vanilla with chocolate syrup and chocolate pieces.", rating: 4.8, img: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=500&h=350&fit=crop", tags: [] },
+        { name: "Apple Pie", category: "Desserts", price: 1.99, desc: "Warm, crispy apple pie with cinnamon sugar.", rating: 4.7, img: "https://images.unsplash.com/photo-1621743478914-cc8a86d7e9d8?w=500&h=350&fit=crop", tags: ["popular"] },
+        { name: "Soft Serve Cone", category: "Desserts", price: 1.29, desc: "Classic vanilla soft serve in a crispy cone.", rating: 4.8, img: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=500&h=350&fit=crop", tags: ["kids"] },
+        { name: "Chocolate Chip Cookie", category: "Desserts", price: 0.99, desc: "Freshly baked chocolate chip cookie.", rating: 4.6, img: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=500&h=350&fit=crop", tags: ["kids"] },
+        { name: "Baked Apple Pie", category: "Desserts", price: 1.99, desc: "Hot and flaky apple pie with a golden crust.", rating: 4.7, img: "https://images.unsplash.com/photo-1621743478914-cc8a86d7e9d8?w=500&h=350&fit=crop", tags: [] },
+        { name: "Strawberry Sundae", category: "Desserts", price: 2.49, desc: "Vanilla soft serve with strawberry topping.", rating: 4.7, img: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=500&h=350&fit=crop", tags: [] },
+        
+        // === BREAKFAST (10 items) ===
+        { name: "Egg McMuffin", category: "Breakfast", price: 4.29, desc: "Fresh egg, Canadian bacon, cheese on English muffin.", rating: 4.8, img: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=500&h=350&fit=crop", tags: ["morning"] },
+        { name: "Sausage McMuffin", category: "Breakfast", price: 3.99, desc: "Savory sausage patty with cheese.", rating: 4.7, img: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=500&h=350&fit=crop", tags: ["morning"] },
+        { name: "Sausage McMuffin with Egg", category: "Breakfast", price: 4.79, desc: "Sausage, egg, and cheese on English muffin.", rating: 4.8, img: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=500&h=350&fit=crop", tags: ["morning"] },
+        { name: "Bacon, Egg & Cheese Biscuit", category: "Breakfast", price: 4.49, desc: "Bacon, egg, cheese on a warm buttermilk biscuit.", rating: 4.7, img: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=500&h=350&fit=crop", tags: ["morning"] },
+        { name: "Sausage Biscuit", category: "Breakfast", price: 3.49, desc: "Sausage patty on a warm buttermilk biscuit.", rating: 4.6, img: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=500&h=350&fit=crop", tags: ["morning"] },
+        { name: "Hotcakes", category: "Breakfast", price: 4.99, desc: "Three fluffy hotcakes with butter and syrup.", rating: 4.8, img: "https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=500&h=350&fit=crop", tags: ["morning"] },
+        { name: "Hotcakes with Sausage", category: "Breakfast", price: 5.99, desc: "Hotcakes with a side of sausage patty.", rating: 4.8, img: "https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=500&h=350&fit=crop", tags: ["morning"] },
+        { name: "Hash Browns", category: "Breakfast", price: 1.79, desc: "Crispy golden hash browns.", rating: 4.7, img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=500&h=350&fit=crop", tags: ["morning"] },
+        { name: "Breakfast Burrito", category: "Breakfast", price: 3.99, desc: "Eggs, sausage, cheese, peppers in a flour tortilla.", rating: 4.6, img: "https://images.unsplash.com/photo-1627662051046-31f31a23a730?w=500&h=350&fit=crop", tags: ["morning"] },
+        { name: "Fruit & Maple Oatmeal", category: "Breakfast", price: 3.49, desc: "Hearty oatmeal with apples, cranberries, raisins.", rating: 4.5, img: "https://images.unsplash.com/photo-1517672651691-2464e2d09023?w=500&h=350&fit=crop", tags: ["healthy"] },
+        
+        // === LUNCH & DINNER SPECIALS (11 items) ===
+        { name: "Big Mac Meal", category: "Meals", price: 8.99, desc: "Big Mac + World Famous Fries + Soft Drink.", rating: 4.9, img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&h=350&fit=crop", tags: ["lunch", "dinner", "popular"] },
+        { name: "Quarter Pounder Meal", category: "Meals", price: 9.49, desc: "Quarter Pounder + Fries + Drink.", rating: 4.8, img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500&h=350&fit=crop", tags: ["lunch", "dinner"] },
+        { name: "10pc McNuggets Meal", category: "Meals", price: 7.99, desc: "10 McNuggets + Fries + Drink + Sauce.", rating: 4.8, img: "https://images.unsplash.com/photo-1562967914-608f82629710?w=500&h=350&fit=crop", tags: ["lunch", "dinner"] },
+        { name: "20pc McNuggets Meal", category: "Meals", price: 10.99, desc: "20 McNuggets + Large Fries + Large Drink + 2 Sauces.", rating: 4.9, img: "https://images.unsplash.com/photo-1562967914-608f82629710?w=500&h=350&fit=crop", tags: ["lunch", "dinner", "family"] },
+        { name: "McChicken Meal", category: "Meals", price: 7.49, desc: "McChicken + Fries + Drink.", rating: 4.7, img: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=500&h=350&fit=crop", tags: ["lunch", "dinner"] },
+        { name: "Happy Meal (Burger)", category: "Kids", price: 4.99, desc: "Cheeseburger + Kids Fries + Apple Slices + Drink + Toy.", rating: 4.8, img: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=500&h=350&fit=crop", tags: ["kids"] },
+        { name: "Happy Meal (Nuggets)", category: "Kids", price: 4.99, desc: "4pc McNuggets + Kids Fries + Apple Slices + Drink + Toy.", rating: 4.8, img: "https://images.unsplash.com/photo-1562967914-608f82629710?w=500&h=350&fit=crop", tags: ["kids"] },
+        { name: "Family Meal Box", category: "Meals", price: 19.99, desc: "2 Big Macs, 2 Cheeseburgers, 20 Nuggets, 4 Fries, 4 Drinks.", rating: 4.9, img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&h=350&fit=crop", tags: ["family", "dinner"] }
     ];
 
+    // Deals Data
     const deals = [
         { emoji: "🍔", badge: "SAVE $3", price: "$5.99", desc: "Big Mac + Fries + Drink", extra: "Regular $8.99", timeLeft: "2d 5h" },
         { emoji: "🍗", badge: "20 PCS", price: "$7.99", desc: "20 Chicken McNuggets", extra: "+ Free Sauce", timeLeft: "1d 12h" },
         { emoji: "🥚", badge: "BREAKFAST", price: "2 for $4", desc: "Any Breakfast Sandwich", extra: "Until 10:30am", timeLeft: "1h 45m" },
-        { emoji: "👨‍👩‍👧‍👦", badge: "FAMILY", price: "$19.99", desc: "Family Meal Box", extra: "Feeds 4 people", timeLeft: "3d 0h" }
+        { emoji: "👨‍👩‍👧‍👦", badge: "FAMILY", price: "$19.99", desc: "Family Meal Box", extra: "Feeds 4 people", timeLeft: "3d 0h" },
+        { emoji: "🍟", badge: "FRIES", price: "$1.99", desc: "Medium Fries", extra: "Any size drink purchase", timeLeft: "4h 30m" }
     ];
 
     let cart = [];
@@ -948,21 +1239,28 @@
     let currentSlide = 0;
     let slideInterval;
     let isDarkMode = false;
+    let searchQuery = "";
 
     // Helper Functions
     function createCard(item, isFeatured = false) {
         const stars = '★'.repeat(Math.floor(item.rating)) + '☆'.repeat(5 - Math.floor(item.rating));
+        const discount = item.tags?.includes("popular") && item.price > 5 ? '<span class="price-old">$' + (item.price + 1.5).toFixed(2) + '</span>' : '';
+        
         return `
             <div class="menu-card">
                 ${isFeatured ? '<div class="card-badge">🔥 Best Seller</div>' : ''}
                 <div class="img-wrapper">
-                    <img src="${item.img}" class="menu-img" alt="${item.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div style=\\'display:flex;align-items:center;justify-content:center;height:250px;font-size:4rem;background:#FFF0D4;\\'>${item.name.includes('Burger') ? '🍔' : item.name.includes('McNuggets') ? '🍗' : item.name.includes('Fries') ? '🍟' : '🍦'}</div>'">
+                    <img src="${item.img}" class="menu-img" alt="${item.name}" loading="lazy" 
+                         onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'fallback-emoji\\'>${getEmojiForItem(item.name)}</div>'">
                 </div>
                 <div class="menu-info">
                     <h3>${item.name}</h3>
                     <p>${item.desc}</p>
                     <div class="price-rating">
-                        <span class="price">$${item.price.toFixed(2)}</span>
+                        <div>
+                            <span class="price">$${item.price.toFixed(2)}</span>
+                            ${discount}
+                        </div>
                         <span class="rating">${stars}</span>
                     </div>
                     <button class="add-btn" onclick="addToCart('${item.name.replace(/'/g, "\\'")}', ${item.price})">
@@ -973,70 +1271,262 @@
         `;
     }
 
-    function renderFeatured() { document.getElementById('featuredGrid').innerHTML = menuDB.slice(0, 8).map(i => createCard(i, true)).join(''); }
-    function renderFullMenu() { const filtered = currentCategory === "All" ? menuDB : menuDB.filter(i => i.category === currentCategory); document.getElementById('fullMenuGrid').innerHTML = filtered.map(i => createCard(i, false)).join(''); }
-    function renderTabs() { const cats = ["All", "Burgers", "Chicken", "Sides", "Desserts", "Breakfast"]; document.getElementById('tabsContainer').innerHTML = cats.map(c => `<button class="tab ${currentCategory === c ? 'active' : ''}" onclick="filterMenu('${c}')">${c}</button>`).join(''); }
-    function renderDeals() { document.getElementById('dealsContainer').innerHTML = deals.map(d => `<div class="deal-card" onclick="showMenu()"><div class="deal-emoji">${d.emoji}</div><div class="deal-badge">${d.badge}</div><h3>${d.price}</h3><p>${d.desc}</p><small>${d.extra}</small><div class="countdown">⏰ ${d.timeLeft} left</div></div>`).join(''); }
+    function getEmojiForItem(name) {
+        if (name.includes("Big Mac") || name.includes("Burger")) return "🍔";
+        if (name.includes("McNuggets")) return "🍗";
+        if (name.includes("Fries")) return "🍟";
+        if (name.includes("McFlurry") || name.includes("Cone") || name.includes("Sundae")) return "🍦";
+        if (name.includes("Pie")) return "🥧";
+        if (name.includes("Drink") || name.includes("Soda")) return "🥤";
+        if (name.includes("Milkshake")) return "🥛";
+        if (name.includes("Salad")) return "🥗";
+        if (name.includes("McMuffin") || name.includes("Biscuit")) return "🥚";
+        if (name.includes("Hotcakes")) return "🥞";
+        if (name.includes("Cookie")) return "🍪";
+        return "🍔";
+    }
 
-    function filterMenu(category) { currentCategory = category; renderTabs(); renderFullMenu(); }
-    function showHome() { document.getElementById('homePage').classList.remove('hidden'); document.getElementById('menuPage').classList.add('hidden'); document.getElementById('homeTab').classList.add('active'); document.getElementById('menuTab').classList.remove('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
-    function showMenu() { document.getElementById('homePage').classList.add('hidden'); document.getElementById('menuPage').classList.remove('hidden'); document.getElementById('menuTab').classList.add('active'); document.getElementById('homeTab').classList.remove('active'); renderTabs(); renderFullMenu(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    function filterBySearch(items) {
+        if (!searchQuery) return items;
+        return items.filter(item => 
+            item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            item.desc.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+    }
+
+    function renderFeatured() {
+        const popular = menuDB.filter(item => item.tags?.includes("popular")).slice(0, 8);
+        document.getElementById('featuredGrid').innerHTML = popular.map(i => createCard(i, true)).join('');
+    }
+
+    function renderFullMenu() {
+        let filtered = currentCategory === "All" ? menuDB : menuDB.filter(i => i.category === currentCategory);
+        filtered = filterBySearch(filtered);
+        document.getElementById('fullMenuGrid').innerHTML = filtered.map(i => createCard(i, false)).join('');
+        if (filtered.length === 0) {
+            document.getElementById('fullMenuGrid').innerHTML = '<div style="text-align:center; padding:3rem;"><i class="fas fa-search" style="font-size:3rem; color:var(--text-muted);"></i><p style="margin-top:1rem;">No items found for "' + searchQuery + '"</p><button class="btn-primary" onclick="clearSearch()">Clear Search</button></div>';
+        }
+    }
+
+    function renderTabs() {
+        const cats = ["All", "Burgers", "Chicken", "Sides", "Desserts", "Breakfast", "Meals", "Kids"];
+        document.getElementById('tabsContainer').innerHTML = cats.map(c => 
+            `<button class="tab ${currentCategory === c ? 'active' : ''}" onclick="filterMenu('${c}')">${c}</button>`
+        ).join('');
+    }
+
+    function renderDeals() {
+        document.getElementById('dealsContainer').innerHTML = deals.map(d => `
+            <div class="deal-card" onclick="showMenu()">
+                <div class="deal-emoji">${d.emoji}</div>
+                <div class="deal-badge">${d.badge}</div>
+                <h3>${d.price}</h3>
+                <p>${d.desc}</p>
+                <small>${d.extra}</small>
+                <div class="countdown">⏰ ${d.timeLeft} left</div>
+            </div>
+        `).join('');
+    }
+
+    function filterMenu(category) {
+        currentCategory = category;
+        renderTabs();
+        renderFullMenu();
+        window.scrollTo({ top: document.querySelector('.tabs').offsetTop - 100, behavior: 'smooth' });
+    }
+
+    function searchMenu() {
+        searchQuery = document.getElementById('searchInput').value;
+        renderFullMenu();
+    }
+
+    function clearSearch() {
+        document.getElementById('searchInput').value = '';
+        searchQuery = '';
+        renderFullMenu();
+    }
+
+    function toggleSearch() {
+        const searchBar = document.getElementById('searchBar');
+        searchBar.style.display = searchBar.style.display === 'none' ? 'block' : 'none';
+        if (searchBar.style.display === 'block') {
+            document.getElementById('searchInput').focus();
+        }
+    }
+
+    function showHome() {
+        document.getElementById('homePage').classList.remove('hidden');
+        document.getElementById('menuPage').classList.add('hidden');
+        document.getElementById('homeTab').classList.add('active');
+        document.getElementById('menuTab').classList.remove('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showMenu() {
+        document.getElementById('homePage').classList.add('hidden');
+        document.getElementById('menuPage').classList.remove('hidden');
+        document.getElementById('menuTab').classList.add('active');
+        document.getElementById('homeTab').classList.remove('active');
+        renderTabs();
+        renderFullMenu();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     function scrollToDeals() { showHome(); setTimeout(() => document.getElementById('dealsSection').scrollIntoView({ behavior: 'smooth' }), 100); }
     function scrollToLocator() { showHome(); setTimeout(() => document.getElementById('locatorSection').scrollIntoView({ behavior: 'smooth' }), 100); }
 
-    function addToCart(name, price) { cart.push({ name, price, id: Date.now() }); updateCartUI(); showToast(`✓ ${name} added to cart!`, "#2E7D32"); }
-    function removeFromCart(index) { cart.splice(index, 1); updateCartUI(); }
+    function addToCart(name, price) {
+        cart.push({ name, price, id: Date.now() });
+        updateCartUI();
+        showToast(`✓ ${name} added to cart!`, "#2E7D32");
+    }
+
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCartUI();
+    }
 
     function updateCartUI() {
         document.getElementById('cartCount').innerText = cart.length;
         const container = document.getElementById('cartItemsList');
-        if (cart.length === 0) { container.innerHTML = '<p style="color:#999; text-align:center; padding:2rem;">Your cart is empty<br>🍔 Add some delicious items!</p>'; document.getElementById('cartSubtotal').innerText = '$0.00'; document.getElementById('cartTax').innerText = '$0.00'; document.getElementById('cartTotal').innerText = '$0.00'; return; }
+        if (cart.length === 0) {
+            container.innerHTML = '<p style="color:#999; text-align:center; padding:2rem;">Your cart is empty<br>🍔 Add some delicious items!</p>';
+            document.getElementById('cartSubtotal').innerText = '$0.00';
+            document.getElementById('cartTax').innerText = '$0.00';
+            document.getElementById('cartTotal').innerText = '$0.00';
+            return;
+        }
         let subtotal = 0;
-        container.innerHTML = cart.map((item, idx) => { subtotal += item.price; return `<div class="cart-item"><div><strong>${item.name}</strong></div><div>$${item.price.toFixed(2)} <button onclick="removeFromCart(${idx})" style="background:none; border:none; color:#DA291C; cursor:pointer;"><i class="fas fa-trash-alt"></i></button></div></div>`; }).join('');
-        const tax = subtotal * 0.10; const total = subtotal + tax;
+        container.innerHTML = cart.map((item, idx) => {
+            subtotal += item.price;
+            return `<div class="cart-item"><div><strong>${item.name}</strong></div><div>$${item.price.toFixed(2)} <button onclick="removeFromCart(${idx})" style="background:none; border:none; color:#DA291C; cursor:pointer;"><i class="fas fa-trash-alt"></i></button></div></div>`;
+        }).join('');
+        const tax = subtotal * 0.10;
+        const total = subtotal + tax;
         document.getElementById('cartSubtotal').innerText = `$${subtotal.toFixed(2)}`;
         document.getElementById('cartTax').innerText = `$${tax.toFixed(2)}`;
         document.getElementById('cartTotal').innerText = `$${total.toFixed(2)}`;
     }
 
-    function toggleCart() { document.getElementById('cartSidebar').classList.toggle('open'); document.getElementById('cartOverlay').style.display = document.getElementById('cartSidebar').classList.contains('open') ? 'block' : 'none'; }
+    function toggleCart() {
+        document.getElementById('cartSidebar').classList.toggle('open');
+        document.getElementById('cartOverlay').style.display = document.getElementById('cartSidebar').classList.contains('open') ? 'block' : 'none';
+    }
 
     function checkout() {
-        if (cart.length === 0) { showToast("Your cart is empty! Add some items 🍔", "#DA291C"); return; }
-        const subtotal = cart.reduce((s,i) => s + i.price, 0);
+        if (cart.length === 0) {
+            showToast("Your cart is empty! Add some items 🍔", "#DA291C");
+            return;
+        }
+        const subtotal = cart.reduce((s, i) => s + i.price, 0);
         const total = subtotal * 1.10;
         document.getElementById('trackingModal').style.display = 'flex';
         cart = [];
         updateCartUI();
         toggleCart();
+        
+        // Animate tracking steps
         let step = 1;
-        const interval = setInterval(() => { if (step <= 4) { document.querySelectorAll('.step')[step-1]?.classList.add('active'); step++; } else { clearInterval(interval); } }, 2000);
+        const interval = setInterval(() => {
+            if (step <= 4) {
+                const steps = document.querySelectorAll('.step');
+                if (steps[step - 1]) steps[step - 1].classList.add('active');
+                step++;
+            } else {
+                clearInterval(interval);
+            }
+        }, 1500);
+        
         showToast(`✅ Order placed! Total: $${total.toFixed(2)}`, "#2E7D32");
     }
-    function closeTracking() { document.getElementById('trackingModal').style.display = 'none'; }
 
-    function findLocation() { const zip = document.getElementById('zipInput').value; if(zip) document.getElementById('locationResults').innerHTML = `<div style="background: white; border-radius: 20px; padding: 1rem;"><p><i class="fas fa-store"></i> <strong>Locations near "${zip}"</strong></p><p>📍 123 Main Street - 0.3 miles<br>📍 456 Broadway - 0.8 miles<br>📍 789 Park Avenue - 1.2 miles</p><p><small>⭐ 4.8 average rating | Open until 11pm</small></p></div>`; else showToast("Please enter a ZIP code", "#DA291C"); }
+    function closeTracking() {
+        document.getElementById('trackingModal').style.display = 'none';
+        // Reset tracking steps
+        document.querySelectorAll('.step').forEach((step, idx) => {
+            if (idx === 0) step.classList.add('active');
+            else step.classList.remove('active');
+        });
+    }
 
-    function showToast(msg, bg) { const t = document.createElement('div'); t.className = 'toast'; t.style.background = bg; t.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`; document.body.appendChild(t); setTimeout(() => t.remove(), 2500); }
+    function findLocation() {
+        const zip = document.getElementById('zipInput').value;
+        if (zip) {
+            document.getElementById('locationResults').innerHTML = `
+                <div style="border-radius: 20px; padding: 1rem;">
+                    <p><i class="fas fa-store"></i> <strong>Locations near "${zip}"</strong></p>
+                    <p>📍 123 Main Street - 0.3 miles (Open until 11pm)<br>
+                       📍 456 Broadway Avenue - 0.8 miles (24 hours)<br>
+                       📍 789 Park Boulevard - 1.2 miles (Open until 10pm)<br>
+                       📍 321 Ocean Drive - 1.8 miles (Drive-thru only)</p>
+                    <p><small>⭐ 4.8 average rating | ⏰ Check store hours</small></p>
+                </div>
+            `;
+        } else {
+            showToast("Please enter a ZIP code", "#DA291C");
+        }
+    }
 
-    function toggleDarkMode() { isDarkMode = !isDarkMode; document.body.classList.toggle('dark-mode', isDarkMode); document.getElementById('themeBtn').innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>'; localStorage.setItem('darkMode', isDarkMode); }
+    function showToast(msg, bg) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.style.background = bg;
+        toast.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2500);
+    }
+
+    function toggleDarkMode() {
+        isDarkMode = !isDarkMode;
+        document.body.classList.toggle('dark-mode', isDarkMode);
+        document.querySelector('.theme-toggle').innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        localStorage.setItem('darkMode', isDarkMode);
+    }
 
     // Hero Slider
     function initSlider() {
         const slides = document.querySelectorAll('.hero-slide');
         const dotsContainer = document.getElementById('sliderDots');
-        slides.forEach((_, i) => { const dot = document.createElement('div'); dot.className = `slider-dot ${i === 0 ? 'active' : ''}`; dot.onclick = () => goToSlide(i); dotsContainer.appendChild(dot); });
-        function goToSlide(n) { slides.forEach((s, i) => { s.classList.remove('active'); if(dotsContainer.children[i]) dotsContainer.children[i].classList.remove('active'); }); slides[n].classList.add('active'); if(dotsContainer.children[n]) dotsContainer.children[n].classList.add('active'); currentSlide = n; }
-        function nextSlide() { goToSlide((currentSlide + 1) % slides.length); }
+        
+        slides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.className = `slider-dot ${i === 0 ? 'active' : ''}`;
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        });
+        
+        function goToSlide(n) {
+            slides.forEach((s, i) => {
+                s.classList.remove('active');
+                if (dotsContainer.children[i]) dotsContainer.children[i].classList.remove('active');
+            });
+            slides[n].classList.add('active');
+            if (dotsContainer.children[n]) dotsContainer.children[n].classList.add('active');
+            currentSlide = n;
+        }
+        
+        function nextSlide() {
+            goToSlide((currentSlide + 1) % slides.length);
+        }
+        
         slideInterval = setInterval(nextSlide, 5000);
         window.goToSlide = goToSlide;
     }
 
-    // Scroll to top
-    window.addEventListener('scroll', () => { document.getElementById('scrollTopBtn').classList.toggle('visible', window.scrollY > 300); });
-    if(localStorage.getItem('darkMode') === 'true') toggleDarkMode();
+    // Scroll to top button
+    window.addEventListener('scroll', () => {
+        const btn = document.getElementById('scrollTopBtn');
+        if (window.scrollY > 300) btn.classList.add('visible');
+        else btn.classList.remove('visible');
+    });
 
-    renderFeatured(); renderDeals(); initSlider();
+    // Load dark mode preference
+    if (localStorage.getItem('darkMode') === 'true') toggleDarkMode();
+
+    // Initialize everything
+    renderFeatured();
+    renderDeals();
+    initSlider();
 </script>
 </body>
 </html>
