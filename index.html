@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McDonald's - Official Website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>McDonald's® | Order Online</title>
     <style>
         * {
             margin: 0;
@@ -12,23 +12,29 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #F8F7F4;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            background: #FDFBF7;
             color: #1a1a1a;
         }
 
         :root {
             --mcd-red: #DA291C;
-            --mcd-yellow: #FFBC0D;
+            --mcd-yellow: #FFC72C;
             --mcd-dark: #27251F;
+            --mcd-green: #2E7D32;
+            --shadow-sm: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.12);
+            --shadow-lg: 0 16px 40px rgba(0,0,0,0.15);
         }
 
+        /* Header */
         header {
             background: var(--mcd-red);
             padding: 0.8rem 5%;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: var(--shadow-sm);
         }
 
         nav {
@@ -41,10 +47,23 @@
         }
 
         .logo {
-            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.6rem;
             font-weight: 800;
             color: var(--mcd-yellow);
-            text-decoration: none;
+        }
+
+        .logo-icon {
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
         }
 
         .nav-links {
@@ -58,31 +77,39 @@
             text-decoration: none;
             font-weight: 600;
             transition: 0.3s;
+            font-size: 1rem;
+            padding: 8px 0;
         }
 
         .nav-links a:hover, .nav-links a.active {
             color: var(--mcd-yellow);
+            border-bottom: 3px solid var(--mcd-yellow);
         }
 
-        .cart-btn {
+        .cart-icon {
             background: rgba(255,255,255,0.2);
             border: none;
-            padding: 8px 18px;
+            padding: 10px 20px;
             border-radius: 40px;
             color: white;
             font-weight: 600;
             cursor: pointer;
             display: flex;
-            gap: 8px;
+            gap: 10px;
             align-items: center;
+            transition: 0.3s;
+        }
+
+        .cart-icon:hover {
+            background: rgba(255,255,255,0.3);
         }
 
         .cart-count {
             background: var(--mcd-yellow);
             color: var(--mcd-red);
             border-radius: 50%;
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -90,40 +117,111 @@
             font-weight: bold;
         }
 
+        /* Hero Section with Slider */
         .hero {
-            background: linear-gradient(135deg, var(--mcd-yellow) 0%, #F5A623 100%);
-            padding: 4rem 5%;
-            text-align: center;
+            position: relative;
+            height: 500px;
+            overflow: hidden;
         }
 
-        .hero h1 {
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide-content {
+            background: rgba(0,0,0,0.5);
+            padding: 2rem;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .slide h1 {
             font-size: 3.5rem;
-            color: var(--mcd-red);
             margin-bottom: 1rem;
         }
 
-        .hero p {
+        .slide p {
             font-size: 1.2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
-        .btn-primary {
-            background: var(--mcd-red);
-            color: white;
-            padding: 12px 35px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 700;
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: white;
             cursor: pointer;
             transition: 0.3s;
         }
 
+        .dot.active {
+            background: var(--mcd-yellow);
+            width: 30px;
+            border-radius: 10px;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: var(--mcd-red);
+            color: white;
+            padding: 14px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: var(--shadow-sm);
+        }
+
         .btn-primary:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
             background: #b91c10;
         }
 
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--mcd-red);
+        }
+
+        /* Sections */
         .section {
             padding: 4rem 5%;
             max-width: 1400px;
@@ -132,80 +230,126 @@
 
         .section-title {
             text-align: center;
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--mcd-red);
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            position: relative;
         }
 
         .section-title::after {
             content: '';
             display: block;
-            width: 60px;
-            height: 3px;
+            width: 80px;
+            height: 4px;
             background: var(--mcd-yellow);
-            margin: 10px auto 0;
+            margin: 12px auto 0;
+            border-radius: 2px;
         }
 
+        /* Menu Grid */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 2rem;
         }
 
         .menu-card {
             background: white;
-            border-radius: 20px;
+            border-radius: 28px;
             overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            transition: 0.3s;
+            box-shadow: var(--shadow-sm);
+            transition: 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
         }
 
         .menu-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .img-wrapper {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .menu-img {
             width: 100%;
-            height: 200px;
+            height: 100%;
             object-fit: cover;
-            background: linear-gradient(135deg, #f5f5f0, #e0dcd3);
+            transition: transform 0.5s;
+        }
+
+        .menu-card:hover .menu-img {
+            transform: scale(1.08);
+        }
+
+        .emoji-fallback {
+            font-size: 5rem;
         }
 
         .menu-info {
-            padding: 1.2rem;
+            padding: 1.5rem;
         }
 
         .menu-card h3 {
             color: var(--mcd-red);
             margin-bottom: 0.5rem;
+            font-size: 1.3rem;
         }
 
         .menu-card p {
-            color: #666;
+            color: #6b6b6b;
             font-size: 0.85rem;
             margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .price-rating {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .price {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             font-weight: 800;
             color: var(--mcd-red);
-            display: inline-block;
+        }
+
+        .rating {
+            color: #FFB800;
+            font-size: 0.9rem;
         }
 
         .add-btn {
             background: var(--mcd-yellow);
             border: none;
-            padding: 8px 18px;
-            border-radius: 30px;
+            padding: 10px 24px;
+            border-radius: 40px;
             font-weight: 700;
             cursor: pointer;
-            float: right;
+            transition: 0.3s;
+            width: 100%;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
+        .add-btn:hover {
+            background: #e6a800;
+            transform: scale(1.02);
+        }
+
+        /* Deals Section */
         .deals-section {
-            background: var(--mcd-red);
+            background: linear-gradient(135deg, var(--mcd-red) 0%, #8B1A10 100%);
             padding: 4rem 5%;
         }
 
@@ -224,21 +368,49 @@
 
         .deal-card {
             background: white;
-            border-radius: 20px;
-            padding: 1.5rem;
-            width: 250px;
+            border-radius: 24px;
+            padding: 1.8rem;
+            width: 260px;
             text-align: center;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .deal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .deal-badge {
+            background: var(--mcd-yellow);
+            color: var(--mcd-red);
+            display: inline-block;
+            padding: 5px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
         }
 
         .deal-card h3 {
             font-size: 2rem;
             color: var(--mcd-red);
+            margin-bottom: 0.5rem;
         }
 
+        .timer {
+            background: var(--mcd-dark);
+            color: white;
+            padding: 8px;
+            border-radius: 30px;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+        }
+
+        /* Location Section */
         .locator-section {
-            background: #F0EDE6;
+            background: linear-gradient(135deg, #F0EDE6, #E8E4DC);
             padding: 4rem 5%;
-            text-align: center;
         }
 
         .locator-box {
@@ -246,15 +418,25 @@
             justify-content: center;
             gap: 15px;
             flex-wrap: wrap;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .locator-box input {
-            padding: 12px 20px;
-            width: 280px;
+            flex: 1;
+            padding: 14px 20px;
             border: 2px solid #ddd;
             border-radius: 50px;
+            font-size: 1rem;
+            transition: 0.3s;
         }
 
+        .locator-box input:focus {
+            outline: none;
+            border-color: var(--mcd-red);
+        }
+
+        /* Menu Page */
         .menu-page {
             background: #FEF9E6;
             min-height: 80vh;
@@ -262,7 +444,8 @@
 
         .menu-header {
             text-align: center;
-            padding: 2rem 5% 1rem;
+            padding: 3rem 5% 1rem;
+            background: linear-gradient(135deg, #FFE8B5, #FEF9E6);
         }
 
         .menu-header h1 {
@@ -270,21 +453,27 @@
             color: var(--mcd-red);
         }
 
+        /* Tabs */
         .tabs {
             display: flex;
             justify-content: center;
             gap: 0.8rem;
             flex-wrap: wrap;
-            padding: 1rem 5%;
+            padding: 2rem 5%;
+            background: #FEF9E6;
+            position: sticky;
+            top: 70px;
+            z-index: 99;
         }
 
         .tab {
             background: white;
             border: 2px solid var(--mcd-red);
-            padding: 8px 24px;
-            border-radius: 40px;
-            font-weight: 600;
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 700;
             cursor: pointer;
+            transition: 0.3s;
             color: var(--mcd-red);
         }
 
@@ -293,18 +482,30 @@
             color: white;
         }
 
+        /* Cart Sidebar */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            display: none;
+        }
+
         .cart-sidebar {
             position: fixed;
-            right: -400px;
+            right: -450px;
             top: 0;
-            width: 380px;
+            width: 420px;
             height: 100vh;
             background: white;
-            z-index: 2000;
-            transition: 0.3s;
+            z-index: 2001;
+            transition: 0.35s;
             display: flex;
             flex-direction: column;
-            box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+            box-shadow: -5px 0 30px rgba(0,0,0,0.2);
         }
 
         .cart-sidebar.open {
@@ -316,6 +517,21 @@
             border-bottom: 2px solid #eee;
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            background: var(--mcd-red);
+            color: white;
+        }
+
+        .cart-header h3 {
+            color: white;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: white;
         }
 
         .cart-items {
@@ -324,67 +540,148 @@
             padding: 1rem;
         }
 
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-info h4 {
+            font-size: 1rem;
+        }
+
+        .cart-item-info p {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .cart-item-price {
+            font-weight: bold;
+            color: var(--mcd-red);
+        }
+
         .cart-footer {
             padding: 1.5rem;
             border-top: 2px solid #eee;
+            background: #f9f9f9;
         }
 
         .cart-total {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
             margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
         }
 
         .checkout-btn {
             width: 100%;
-            background: var(--mcd-red);
+            background: var(--mcd-green);
             color: white;
-            padding: 12px;
+            padding: 14px;
             border: none;
-            border-radius: 40px;
+            border-radius: 50px;
             font-weight: bold;
             cursor: pointer;
+            font-size: 1rem;
         }
 
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1999;
-            display: none;
-        }
-
+        /* Toast Notification */
         .toast {
             position: fixed;
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            background: #2e7d32;
+            background: var(--mcd-green);
             color: white;
-            padding: 12px 24px;
-            border-radius: 40px;
+            padding: 14px 28px;
+            border-radius: 50px;
             z-index: 3000;
-            font-weight: bold;
+            font-weight: 600;
+            box-shadow: var(--shadow-md);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
 
         .hidden {
             display: none;
         }
 
+        /* Footer */
         footer {
             background: var(--mcd-dark);
             color: white;
             text-align: center;
-            padding: 2rem;
+            padding: 2.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--mcd-yellow);
+        }
+
+        .social-icons a {
+            color: white;
+            margin: 0 12px;
+            font-size: 1.4rem;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--mcd-yellow);
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--mcd-red);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: 0.3s;
+            z-index: 99;
+            border: none;
+            box-shadow: var(--shadow-md);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
         }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
+            .hero { height: 400px; }
+            .slide h1 { font-size: 1.8rem; }
             .nav-links { gap: 1rem; }
             .cart-sidebar { width: 100%; right: -100%; }
+            .tabs { top: 60px; }
+            .scroll-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -393,56 +690,76 @@
 
 <header>
     <nav>
-        <div class="logo">🍔 McDonald's®</div>
+        <div class="logo">
+            <div class="logo-icon">🍔</div>
+            <span>McDonald's<sup style="font-size: 10px;">®</sup></span>
+        </div>
         <ul class="nav-links">
             <li><a href="#" onclick="showHome()" id="homeTab" class="active">Home</a></li>
             <li><a href="#" onclick="showMenu()" id="menuTab">Menu</a></li>
             <li><a href="#" onclick="scrollToDeals()">Deals</a></li>
             <li><a href="#" onclick="scrollToLocator()">Locations</a></li>
         </ul>
-        <button class="cart-btn" onclick="toggleCart()">
-            <i class="fas fa-shopping-bag"></i>
+        <button class="cart-icon" onclick="toggleCart()">
+            <i class="fas fa-bag-shopping"></i>
             <span class="cart-count" id="cartCount">0</span>
         </button>
     </nav>
 </header>
 
-<!-- Home Page -->
-<div id="homePage">
-    <section class="hero">
-        <h1>Let's McDonald's</h1>
-        <p>Fresh. Fast. Delicious.</p>
-        <button class="btn-primary" onclick="showMenu()">Order Now →</button>
-    </section>
+<!-- Hero Slider -->
+<div class="hero" id="heroSlider">
+    <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=1200&h=500&fit=crop')">
+        <div class="slide-content">
+            <h1>Big Mac®</h1>
+            <p>Two all-beef patties, special sauce, lettuce, cheese</p>
+            <button class="btn-outline" onclick="showMenu()">Order Now</button>
+        </div>
+    </div>
+    <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1562967914-608f82629710?w=1200&h=500&fit=crop')">
+        <div class="slide-content">
+            <h1>10pc McNuggets®</h1>
+            <p>Juicy chicken nuggets with your choice of sauce</p>
+            <button class="btn-outline" onclick="showMenu()">Order Now</button>
+        </div>
+    </div>
+    <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=1200&h=500&fit=crop')">
+        <div class="slide-content">
+            <h1>World Famous Fries</h1>
+            <p>Golden, crispy, salted to perfection</p>
+            <button class="btn-outline" onclick="showMenu()">Order Now</button>
+        </div>
+    </div>
+    <div class="slider-dots" id="sliderDots"></div>
+</div>
 
+<!-- Home Page Content -->
+<div id="homePage">
     <section class="section">
-        <h2 class="section-title">🔥 Popular Items</h2>
+        <h2 class="section-title">🔥 Most Popular</h2>
         <div class="menu-grid" id="featuredGrid"></div>
     </section>
 
     <section class="deals-section" id="dealsSection">
-        <h2 class="section-title">🎉 Hot Deals</h2>
-        <div class="deals-container">
-            <div class="deal-card"><h3>$5.99</h3><p>Big Mac + Fries + Drink</p><small>Save $3</small></div>
-            <div class="deal-card"><h3>$7.99</h3><p>20pc McNuggets</p><small>+ Free Sauce</small></div>
-            <div class="deal-card"><h3>2/$4</h3><p>Breakfast Sandwiches</p><small>Until 10:30am</small></div>
-        </div>
+        <h2 class="section-title">🎉 Limited Time Offers</h2>
+        <div class="deals-container" id="dealsContainer"></div>
     </section>
 
     <section class="locator-section" id="locatorSection">
-        <h2 class="section-title">📍 Find Us</h2>
+        <h2 class="section-title">📍 Find Your Nearest McDonald's</h2>
         <div class="locator-box">
-            <input type="text" id="zipInput" placeholder="Enter ZIP code">
-            <button class="btn-primary" onclick="findLocation()">Search</button>
+            <input type="text" id="zipInput" placeholder="Enter ZIP code or city">
+            <button class="btn-primary" onclick="findLocation()"><i class="fas fa-search"></i> Search</button>
         </div>
+        <div id="locationResults" style="text-align: center; margin-top: 1rem;"></div>
     </section>
 </div>
 
 <!-- Menu Page -->
 <div id="menuPage" class="menu-page hidden">
     <div class="menu-header">
-        <h1>🍔 Full Menu 🍟</h1>
-        <p>Explore all our delicious items</p>
+        <h1>🍔 Our Full Menu 🍟</h1>
+        <p>Freshly prepared just for you</p>
     </div>
     <div class="tabs" id="tabsContainer"></div>
     <div class="section">
@@ -451,43 +768,138 @@
 </div>
 
 <!-- Cart Sidebar -->
-<div class="overlay" id="overlay" onclick="toggleCart()"></div>
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
 <div class="cart-sidebar" id="cartSidebar">
-    <div class="cart-header"><h3>Your Bag</h3><button onclick="toggleCart()" style="background:none; border:none; font-size:1.5rem;">✕</button></div>
-    <div class="cart-items" id="cartItems"><p style="color:#999;">Empty</p></div>
-    <div class="cart-footer"><div class="cart-total" id="cartTotal">Total: $0.00</div><button class="checkout-btn" onclick="checkout()">Checkout →</button></div>
+    <div class="cart-header">
+        <h3><i class="fas fa-bag-shopping"></i> Your Order</h3>
+        <button class="close-cart" onclick="toggleCart()">×</button>
+    </div>
+    <div class="cart-items" id="cartItemsList">
+        <p style="color:#999; text-align:center; padding:2rem;">Your cart is empty</p>
+    </div>
+    <div class="cart-footer">
+        <div class="cart-total">
+            <span>Subtotal:</span>
+            <span id="cartTotalAmount">$0.00</span>
+        </div>
+        <div class="cart-total" style="font-size:1.1rem;">
+            <span>Tax (10%):</span>
+            <span id="cartTaxAmount">$0.00</span>
+        </div>
+        <div class="cart-total" style="border-top: 2px solid var(--mcd-yellow); padding-top: 0.8rem;">
+            <span>Total:</span>
+            <span id="cartFinalAmount">$0.00</span>
+        </div>
+        <button class="checkout-btn" onclick="checkout()"><i class="fas fa-credit-card"></i> Checkout</button>
+    </div>
 </div>
 
+<!-- Scroll to Top Button -->
+<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
 <footer>
-    <p>© 2025 McDonald's. All rights reserved.</p>
-    <p style="margin-top:10px;">🍔 Serving happiness since 1955</p>
+    <div class="footer-links">
+        <a href="#">About Us</a>
+        <a href="#">Careers</a>
+        <a href="#">Nutrition</a>
+        <a href="#">Gift Cards</a>
+        <a href="#">Contact</a>
+    </div>
+    <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-tiktok"></i></a>
+    </div>
+    <p>© 2025 McDonald's. All rights reserved. | Serving happiness since 1955</p>
+    <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.7;">Download our app for exclusive deals!</p>
 </footer>
 
 <script>
-    // Menu Data with EMOJI FALLBACK (always shows something!)
+    // Complete Menu Database with HIGH-QUALITY IMAGES
     const menuDB = [
-        { name: "Big Mac", category: "Burgers", price: 5.99, desc: "Two patties, special sauce, lettuce, cheese", emoji: "🍔", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
-        { name: "Quarter Pounder", category: "Burgers", price: 6.29, desc: "¼ lb beef, cheese, pickles, onions", emoji: "🍔", img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400&h=300&fit=crop" },
-        { name: "McDouble", category: "Burgers", price: 3.49, desc: "Two patties, cheese, pickles", emoji: "🍔", img: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&h=300&fit=crop" },
-        { name: "Cheeseburger", category: "Burgers", price: 2.49, desc: "Classic cheeseburger", emoji: "🧀", img: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&h=300&fit=crop" },
-        { name: "10pc McNuggets", category: "Chicken", price: 4.99, desc: "10 juicy chicken nuggets", emoji: "🍗", img: "https://images.unsplash.com/photo-1562967914-608f82629710?w=400&h=300&fit=crop" },
-        { name: "20pc McNuggets", category: "Chicken", price: 7.99, desc: "20 nuggets, shareable", emoji: "🍗", img: "https://images.unsplash.com/photo-1562967914-608f82629710?w=400&h=300&fit=crop" },
-        { name: "McChicken", category: "Chicken", price: 4.29, desc: "Crispy chicken sandwich", emoji: "🐔", img: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=400&h=300&fit=crop" },
-        { name: "French Fries", category: "Sides", price: 2.49, desc: "World famous golden fries", emoji: "🍟", img: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop" },
-        { name: "Large Fries", category: "Sides", price: 3.29, desc: "Extra large fries", emoji: "🍟", img: "https://images.unsplash.com/photo-1585109649139-366815a0d713?w=400&h=300&fit=crop" },
-        { name: "Soft Drink", category: "Sides", price: 1.99, desc: "Coke, Sprite, Fanta", emoji: "🥤", img: "https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=400&h=300&fit=crop" },
-        { name: "Oreo McFlurry", category: "Desserts", price: 3.29, desc: "Vanilla with Oreo", emoji: "🍦", img: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=400&h=300&fit=crop" },
-        { name: "Apple Pie", category: "Desserts", price: 1.99, desc: "Warm apple pie", emoji: "🥧", img: "https://images.unsplash.com/photo-1621743478914-cc8a86d7e9d8?w=400&h=300&fit=crop" },
-        { name: "Soft Serve Cone", category: "Desserts", price: 1.29, desc: "Classic vanilla cone", emoji: "🍦", img: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=400&h=300&fit=crop" },
-        { name: "Egg McMuffin", category: "Breakfast", price: 4.29, desc: "Egg, bacon, cheese on muffin", emoji: "🥚", img: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400&h=300&fit=crop" },
-        { name: "Hash Browns", category: "Breakfast", price: 1.79, desc: "Crispy hash browns", emoji: "🥔", img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=400&h=300&fit=crop" }
+        // Burgers
+        { name: "Big Mac", category: "Burgers", price: 5.99, desc: "Two patties, special sauce, lettuce, cheese, pickles", rating: 4.8, img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=250&fit=crop" },
+        { name: "Quarter Pounder", category: "Burgers", price: 6.29, desc: "¼ lb beef, cheese, pickles, onions, ketchup", rating: 4.7, img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400&h=250&fit=crop" },
+        { name: "McDouble", category: "Burgers", price: 3.49, desc: "Two patties, cheese, pickles, onions, mustard", rating: 4.5, img: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&h=250&fit=crop" },
+        { name: "Double Cheeseburger", category: "Burgers", price: 4.19, desc: "Two patties with double cheese", rating: 4.6, img: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&h=250&fit=crop" },
+        { name: "Bacon Burger", category: "Burgers", price: 5.49, desc: "Beef patty with crispy bacon", rating: 4.8, img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=400&h=250&fit=crop" },
+        
+        // Chicken
+        { name: "10pc McNuggets", category: "Chicken", price: 4.99, desc: "10 juicy chicken nuggets", rating: 4.7, img: "https://images.unsplash.com/photo-1562967914-608f82629710?w=400&h=250&fit=crop" },
+        { name: "20pc McNuggets", category: "Chicken", price: 7.99, desc: "20 nuggets, perfect for sharing", rating: 4.8, img: "https://images.unsplash.com/photo-1562967914-608f82629710?w=400&h=250&fit=crop" },
+        { name: "McChicken", category: "Chicken", price: 4.29, desc: "Crispy chicken with lettuce & mayo", rating: 4.6, img: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=400&h=250&fit=crop" },
+        { name: "Spicy McChicken", category: "Chicken", price: 4.49, desc: "Spicy crispy chicken sandwich", rating: 4.7, img: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=400&h=250&fit=crop" },
+        
+        // Sides
+        { name: "French Fries", category: "Sides", price: 2.49, desc: "World famous golden fries", rating: 4.9, img: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=250&fit=crop" },
+        { name: "Large Fries", category: "Sides", price: 3.29, desc: "Extra large shareable fries", rating: 4.8, img: "https://images.unsplash.com/photo-1585109649139-366815a0d713?w=400&h=250&fit=crop" },
+        { name: "Soft Drink", category: "Sides", price: 1.99, desc: "Coke, Sprite, Fanta, Dr Pepper", rating: 4.5, img: "https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=400&h=250&fit=crop" },
+        { name: "Milkshake", category: "Sides", price: 3.49, desc: "Chocolate, Vanilla, or Strawberry", rating: 4.7, img: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400&h=250&fit=crop" },
+        
+        // Desserts
+        { name: "Oreo McFlurry", category: "Desserts", price: 3.29, desc: "Vanilla with Oreo pieces", rating: 4.8, img: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=400&h=250&fit=crop" },
+        { name: "Apple Pie", category: "Desserts", price: 1.99, desc: "Warm crispy apple pie", rating: 4.6, img: "https://images.unsplash.com/photo-1621743478914-cc8a86d7e9d8?w=400&h=250&fit=crop" },
+        { name: "Soft Serve Cone", category: "Desserts", price: 1.29, desc: "Classic vanilla cone", rating: 4.7, img: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=400&h=250&fit=crop" },
+        { name: "Chocolate Cookie", category: "Desserts", price: 0.99, desc: "Freshly baked chocolate chip", rating: 4.5, img: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400&h=250&fit=crop" },
+        
+        // Breakfast
+        { name: "Egg McMuffin", category: "Breakfast", price: 4.29, desc: "Fresh egg, Canadian bacon, cheese", rating: 4.7, img: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400&h=250&fit=crop" },
+        { name: "Sausage McMuffin", category: "Breakfast", price: 3.99, desc: "Sausage patty with cheese", rating: 4.6, img: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400&h=250&fit=crop" },
+        { name: "Hotcakes", category: "Breakfast", price: 4.99, desc: "Three fluffy hotcakes with syrup", rating: 4.8, img: "https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=400&h=250&fit=crop" },
+        { name: "Hash Browns", category: "Breakfast", price: 1.79, desc: "Crispy golden hash browns", rating: 4.8, img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=400&h=250&fit=crop" }
+    ];
+
+    const deals = [
+        { badge: "SAVE $3", price: "$5.99", description: "Big Mac + Fries + Drink", original: "$8.99", emoji: "🍔" },
+        { badge: "20 PCS", price: "$7.99", description: "20 Chicken McNuggets", extra: "+ Free Sauce", emoji: "🍗" },
+        { badge: "BREAKFAST", price: "2 for $4", description: "Any Breakfast Sandwich", extra: "Until 10:30am", emoji: "🥚" },
+        { badge: "FAMILY", price: "$19.99", description: "Family Meal Box", extra: "Feeds 4 people", emoji: "👨‍👩‍👧‍👦" }
     ];
 
     let cart = [];
     let currentCategory = "All";
+    let currentSlide = 0;
+    let slideInterval;
 
+    // Helper Functions
     function getCategories() {
         return ["All", "Burgers", "Chicken", "Sides", "Desserts", "Breakfast"];
+    }
+
+    function createCard(item) {
+        const stars = '★'.repeat(Math.floor(item.rating)) + '☆'.repeat(5 - Math.floor(item.rating));
+        return `
+            <div class="menu-card">
+                <div class="img-wrapper">
+                    <img src="${item.img}" class="menu-img" alt="${item.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'emoji-fallback\\'>${item.name === 'Big Mac' ? '🍔' : item.name.includes('McNuggets') ? '🍗' : item.name.includes('Fries') ? '🍟' : item.name.includes('Drink') ? '🥤' : '🍦'}</div>'">
+                </div>
+                <div class="menu-info">
+                    <h3>${item.name}</h3>
+                    <p>${item.desc}</p>
+                    <div class="price-rating">
+                        <span class="price">$${item.price.toFixed(2)}</span>
+                        <span class="rating">${stars} ${item.rating}</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('${item.name.replace(/'/g, "\\'")}', ${item.price})">
+                        <i class="fas fa-plus-circle"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderFeatured() {
+        const featured = menuDB.slice(0, 6);
+        document.getElementById('featuredGrid').innerHTML = featured.map(item => createCard(item)).join('');
+    }
+
+    function renderFullMenu() {
+        const filtered = currentCategory === "All" ? menuDB : menuDB.filter(item => item.category === currentCategory);
+        document.getElementById('fullMenuGrid').innerHTML = filtered.map(item => createCard(item)).join('');
     }
 
     function renderTabs() {
@@ -497,27 +909,17 @@
         ).join('');
     }
 
-    function createCard(item) {
-        return `
-            <div class="menu-card">
-                <img src="${item.img}" class="menu-img" alt="${item.name}" onerror="this.parentElement.innerHTML='<div class=\'menu-img\' style=\'display:flex;align-items:center;justify-content:center;font-size:4rem;background:#FFF0D4;\'>${item.emoji}</div>${this.outerHTML}'">
-                <div class="menu-info">
-                    <h3>${item.name}</h3>
-                    <p>${item.desc}</p>
-                    <span class="price">$${item.price.toFixed(2)}</span>
-                    <button class="add-btn" onclick="addToCart('${item.name.replace(/'/g, "\\'")}', ${item.price})">+ Add</button>
-                </div>
+    function renderDeals() {
+        document.getElementById('dealsContainer').innerHTML = deals.map(deal => `
+            <div class="deal-card" onclick="showMenu()">
+                <div class="deal-badge">${deal.badge}</div>
+                <div style="font-size: 3rem;">${deal.emoji}</div>
+                <h3>${deal.price}</h3>
+                <p>${deal.description}</p>
+                <small>${deal.original || deal.extra || ''}</small>
+                <div class="timer">⏰ Limited time only!</div>
             </div>
-        `;
-    }
-
-    function renderFeatured() {
-        document.getElementById('featuredGrid').innerHTML = menuDB.slice(0, 6).map(item => createCard(item)).join('');
-    }
-
-    function renderFullMenu() {
-        const filtered = currentCategory === "All" ? menuDB : menuDB.filter(item => item.category === currentCategory);
-        document.getElementById('fullMenuGrid').innerHTML = filtered.map(item => createCard(item)).join('');
+        `).join('');
     }
 
     function filterMenu(category) {
@@ -527,31 +929,53 @@
     }
 
     function addToCart(name, price) {
-        cart.push({ name, price });
-        document.getElementById('cartCount').innerText = cart.length;
-        updateCartDisplay();
-        showToast(`✓ ${name} added`);
-    }
-
-    function updateCartDisplay() {
-        const container = document.getElementById('cartItems');
-        if (cart.length === 0) {
-            container.innerHTML = '<p style="color:#999;">Empty</p>';
-            document.getElementById('cartTotal').innerHTML = 'Total: $0.00';
-            return;
-        }
-        let total = 0;
-        container.innerHTML = cart.map((item, idx) => {
-            total += item.price;
-            return `<div style="display:flex; justify-content:space-between; padding:8px 0;"><span>${item.name}</span><span>$${item.price.toFixed(2)} <button onclick="removeFromCart(${idx})" style="color:red; border:none; background:none;">✕</button></span></div>`;
-        }).join('');
-        document.getElementById('cartTotal').innerHTML = `Total: $${total.toFixed(2)}`;
+        cart.push({ name, price, id: Date.now() });
+        updateCartUI();
+        showToast(`✓ ${name} added to bag!`, "#2E7D32");
     }
 
     function removeFromCart(index) {
         cart.splice(index, 1);
-        document.getElementById('cartCount').innerText = cart.length;
-        updateCartDisplay();
+        updateCartUI();
+    }
+
+    function updateCartUI() {
+        const count = cart.length;
+        document.getElementById('cartCount').innerText = count;
+        
+        const container = document.getElementById('cartItemsList');
+        if (count === 0) {
+            container.innerHTML = '<p style="color:#999; text-align:center; padding:2rem;">Your cart is empty<br>🍔 Add some delicious items!</p>';
+            document.getElementById('cartTotalAmount').innerText = '$0.00';
+            document.getElementById('cartTaxAmount').innerText = '$0.00';
+            document.getElementById('cartFinalAmount').innerText = '$0.00';
+            return;
+        }
+        
+        let subtotal = 0;
+        container.innerHTML = cart.map((item, idx) => {
+            subtotal += item.price;
+            return `
+                <div class="cart-item">
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                    </div>
+                    <div class="cart-item-price">
+                        $${item.price.toFixed(2)}
+                        <button onclick="removeFromCart(${idx})" style="background:none; border:none; color:#DA291C; cursor:pointer; margin-left:10px;">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+        const tax = subtotal * 0.10;
+        const total = subtotal + tax;
+        
+        document.getElementById('cartTotalAmount').innerText = `$${subtotal.toFixed(2)}`;
+        document.getElementById('cartTaxAmount').innerText = `$${tax.toFixed(2)}`;
+        document.getElementById('cartFinalAmount').innerText = `$${total.toFixed(2)}`;
     }
 
     function showHome() {
@@ -559,6 +983,7 @@
         document.getElementById('menuPage').classList.add('hidden');
         document.getElementById('homeTab').classList.add('active');
         document.getElementById('menuTab').classList.remove('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function showMenu() {
@@ -568,28 +993,101 @@
         document.getElementById('homeTab').classList.remove('active');
         renderTabs();
         renderFullMenu();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function toggleCart() {
         document.getElementById('cartSidebar').classList.toggle('open');
-        document.getElementById('overlay').classList.toggle('show');
+        document.getElementById('cartOverlay').style.display = document.getElementById('cartSidebar').classList.contains('open') ? 'block' : 'none';
     }
 
     function checkout() {
-        if (cart.length === 0) { alert("Cart is empty!"); return; }
-        alert(`✅ Order placed!\nTotal: $${cart.reduce((s,i)=>s+i.price,0).toFixed(2)}\nThank you!`);
+        if (cart.length === 0) {
+            showToast("Your bag is empty! Add some items 🍔", "#DA291C");
+            return;
+        }
+        const subtotal = cart.reduce((sum, i) => sum + i.price, 0);
+        const tax = subtotal * 0.10;
+        const total = subtotal + tax;
+        alert(`✅ ORDER CONFIRMED!\n\nItems: ${cart.length}\nSubtotal: $${subtotal.toFixed(2)}\nTax: $${tax.toFixed(2)}\nTotal: $${total.toFixed(2)}\n\nEstimated delivery: 15-20 min\nThank you for choosing McDonald's! 🍔`);
         cart = [];
-        updateCartDisplay();
-        document.getElementById('cartCount').innerText = 0;
+        updateCartUI();
         toggleCart();
+        showToast("Order placed successfully! 🎉", "#2E7D32");
     }
 
     function scrollToDeals() { showHome(); setTimeout(() => document.getElementById('dealsSection').scrollIntoView({ behavior: 'smooth' }), 100); }
     function scrollToLocator() { showHome(); setTimeout(() => document.getElementById('locatorSection').scrollIntoView({ behavior: 'smooth' }), 100); }
-    function findLocation() { alert(`📍 Finding McDonald's near "${document.getElementById('zipInput').value || 'your area'}"...`); }
-    function showToast(msg) { const t = document.createElement('div'); t.className = 'toast'; t.innerText = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 2000); }
 
+    function findLocation() {
+        const zip = document.getElementById('zipInput').value;
+        if (zip) {
+            document.getElementById('locationResults').innerHTML = `
+                <div style="background: white; border-radius: 20px; padding: 1rem; max-width: 500px; margin: 1rem auto;">
+                    <p><i class="fas fa-store"></i> <strong>Locations near "${zip}"</strong></p>
+                    <p>📍 123 Main Street - 0.3 miles <br> 📍 456 Broadway - 0.8 miles <br> 📍 789 Park Avenue - 1.2 miles</p>
+                    <p><small>⭐ 4.8 average rating | Open until 11pm</small></p>
+                </div>
+            `;
+        } else {
+            showToast("Please enter a ZIP code", "#DA291C");
+        }
+    }
+
+    function showToast(msg, bg) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.style.background = bg || '#2E7D32';
+        toast.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2500);
+    }
+
+    // Hero Slider
+    function initSlider() {
+        const slides = document.querySelectorAll('.slide');
+        const dotsContainer = document.getElementById('sliderDots');
+        
+        slides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.className = `dot ${i === 0 ? 'active' : ''}`;
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        });
+        
+        function goToSlide(n) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (dotsContainer.children[i]) dotsContainer.children[i].classList.remove('active');
+            });
+            slides[n].classList.add('active');
+            if (dotsContainer.children[n]) dotsContainer.children[n].classList.add('active');
+            currentSlide = n;
+        }
+        
+        function nextSlide() {
+            let next = (currentSlide + 1) % slides.length;
+            goToSlide(next);
+        }
+        
+        slideInterval = setInterval(nextSlide, 5000);
+        window.goToSlide = goToSlide;
+    }
+
+    // Scroll to top button
+    window.addEventListener('scroll', () => {
+        const btn = document.getElementById('scrollTopBtn');
+        if (window.scrollY > 300) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
+        }
+    });
+
+    // Initialize everything
     renderFeatured();
+    renderDeals();
+    initSlider();
 </script>
 </body>
 </html>
