@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>McDonald's | Let's McDonald's</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --mcd-red: #da291c;
+            --mcd-yellow: #ffc72c;
+            --mcd-white: #ffffff;
+            --mcd-black: #27251f;
+            --mcd-gray: #f4f4f4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--mcd-white);
+            color: var(--mcd-black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION --- */
+        header {
+            background: var(--mcd-white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--mcd-red);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span { color: var(--mcd-yellow); }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--mcd-black);
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--mcd-red); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(rgba(218, 41, 28, 0.9), rgba(218, 41, 28, 0.8)), 
+                        url('https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .cta-btn {
+            background-color: var(--mcd-yellow);
+            color: var(--mcd-black);
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+            text-decoration: none;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+            background-color: #f0b81d;
+        }
+
+        /* --- POPULAR ITEMS --- */
+        .section-padding { padding: 80px 10%; }
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--mcd-gray);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .card:hover { transform: translateY(-10px); }
+
+        .card-img {
+            font-size: 5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .card h3 { margin-bottom: 10px; }
+
+        /* --- DEALS SECTION --- */
+        .deals {
+            background: var(--mcd-yellow);
+            padding: 60px 10%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .deal-box {
+            background: var(--mcd-red);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+            border: 3px dashed white;
+        }
+
+        /* --- LOCATOR --- */
+        .locator {
+            text-align: center;
+            background: var(--mcd-gray);
+        }
+
+        .locator-form {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .locator-form input {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 250px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--mcd-black);
+            color: white;
+            padding: 50px 10% 20px;
+            text-align: center;
+        }
+
+        .social-icons {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .social-icons a {
+            color: white;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover { color: var(--mcd-yellow); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            nav { display: none; } /* Simplified for mobile example */
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo"><span>M</span>cDonald's</a>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#deals">Deals</a></li>
+                <li><a href="#location">Location</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <h1>Let's McDonald's</h1>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem;">Delicious moments for everyone.</p>
+        <a href="#menu" class="cta-btn">View Full Menu</a>
+    </section>
+
+    <section class="section-padding" id="menu">
+        <h2 class="section-title">Popular Items</h2>
+        <div class="menu-grid">
+            <div class="card">
+                <span class="card-img">🍔</span>
+                <h3>Big Mac</h3>
+                <p>The icon. Two 100% beef patties, special sauce, lettuce, cheese, pickles, and onions.</p>
+            </div>
+            <div class="card">
+                <span class="card-img">🍟</span>
+                <h3>World Famous Fries</h3>
+                <p>Crispy, golden, and salted to perfection. The ultimate sidekick.</p>
+            </div>
+            <div class="card">
+                <span class="card-img">🍗</span>
+                <h3>Chicken McNuggets</h3>
+                <p>Made with 100% white meat chicken. Perfect for dipping.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="deals" id="deals">
+        <div class="deal-box">
+            <h2>$1 Off Large Fries</h2>
+            <p>Available only on our App.</p>
+        </div>
+        <div class="deal-box">
+            <h2>Free McNuggets</h2>
+            <p>With your first purchase of $1 or more!</p>
+        </div>
+    </section>
+
+    <section class="section-padding locator" id="location">
+        <h2>Find a McDonald's Near You</h2>
+        <form class="locator-form" id="locatorForm">
+            <input type="text" placeholder="Enter Zip Code" id="zipInput" required>
+            <button type="submit" class="cta-btn" style="padding: 12px 25px;">Search</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p>&copy; 2024 McDonald's Mockup. All Rights Reserved.</p>
+        <p style="font-size: 0.8rem; margin-top: 10px; color: #888;">*Not affiliated with McDonald's Corporation.</p>
+    </footer>
+
+    <script>
+        document.getElementById('locatorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const zip = document.getElementById('zipInput').value;
+            if(zip) {
+                alert("Coming soon to your area! We're expanding fast.");
+                document.getElementById('zipInput').value = '';
+            }
+        });
+
+        // Simple smooth scroll for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
