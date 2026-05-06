@@ -3,306 +3,584 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McDonald's | Let's McDonald's</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+    <title>McDonald's - Fresh & Fast</title>
     <style>
-        /* --- CSS VARIABLES & RESET --- */
-        :root {
-            --mcd-red: #da291c;
-            --mcd-yellow: #ffc72c;
-            --mcd-white: #ffffff;
-            --mcd-black: #27251f;
-            --mcd-gray: #f4f4f4;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            background-color: var(--mcd-white);
-            color: var(--mcd-black);
-            line-height: 1.6;
-            overflow-x: hidden;
+            font-family: 'Poppins', sans-serif;
+            background: #fff;
+            color: #2d2d2d;
         }
 
-        /* --- NAVIGATION --- */
+        /* McDonald's Colors */
+        :root {
+            --mcd-red: #DA291C;
+            --mcd-yellow: #FFC72C;
+            --mcd-gold: #Ffbc1d;
+        }
+
+        /* Header Styles */
         header {
-            background: var(--mcd-white);
+            background: var(--mcd-red);
             padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        .logo {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--mcd-red);
-            text-decoration: none;
+        nav {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 10px;
+            flex-wrap: wrap;
         }
 
-        .logo span { color: var(--mcd-yellow); }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
-        nav a {
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--mcd-yellow);
             text-decoration: none;
-            color: var(--mcd-black);
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
             font-weight: 600;
             transition: 0.3s;
         }
 
-        nav a:hover { color: var(--mcd-red); }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--mcd-yellow);
+        }
 
-        /* --- HERO SECTION --- */
+        /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(218, 41, 28, 0.9), rgba(218, 41, 28, 0.8)), 
-                        url('https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&q=80&w=1920');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            background: linear-gradient(135deg, var(--mcd-yellow) 0%, #e6a800 100%);
+            padding: 4rem 5%;
             text-align: center;
-            color: white;
-            padding: 0 20px;
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-size: 3.5rem;
+            color: var(--mcd-red);
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
         }
 
-        .cta-btn {
-            background-color: var(--mcd-yellow);
-            color: var(--mcd-black);
-            padding: 15px 40px;
-            border: none;
-            border-radius: 50px;
+        .hero p {
             font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            background: var(--mcd-red);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.3s, background-color 0.3s;
+            transition: 0.3s;
             text-decoration: none;
+            display: inline-block;
         }
 
-        .cta-btn:hover {
-            transform: scale(1.05);
-            background-color: #f0b81d;
+        .btn:hover {
+            background: #b22217;
+            transform: translateY(-2px);
         }
 
-        /* --- POPULAR ITEMS --- */
-        .section-padding { padding: 80px 10%; }
-        .section-title {
+        .btn-yellow {
+            background: var(--mcd-yellow);
+            color: #2d2d2d;
+        }
+
+        .btn-yellow:hover {
+            background: #e6b800;
+        }
+
+        /* Menu Page Container */
+        .menu-page {
+            padding: 3rem 5%;
+            background: #fef7e0;
+            min-height: 80vh;
+        }
+
+        .menu-header {
             text-align: center;
-            margin-bottom: 50px;
-            font-size: 2.5rem;
+            margin-bottom: 3rem;
         }
 
+        .menu-header h1 {
+            font-size: 2.5rem;
+            color: var(--mcd-red);
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-header p {
+            color: #666;
+        }
+
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .tab-btn {
+            background: white;
+            border: 2px solid var(--mcd-red);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            color: var(--mcd-red);
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--mcd-red);
+            color: white;
+        }
+
+        /* Menu Grid */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
         }
 
-        .card {
-            background: var(--mcd-gray);
-            border-radius: 15px;
-            padding: 20px;
+        .menu-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: 0.3s;
             text-align: center;
+            padding: 1.5rem;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+
+        .menu-emoji {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-card h3 {
+            color: var(--mcd-red);
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--mcd-red);
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .order-btn {
+            background: var(--mcd-yellow);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
             transition: 0.3s;
         }
 
-        .card:hover { transform: translateY(-10px); }
-
-        .card-img {
-            font-size: 5rem;
-            margin-bottom: 15px;
-            display: block;
+        .order-btn:hover {
+            background: var(--mcd-gold);
+            transform: scale(1.02);
         }
 
-        .card h3 { margin-bottom: 10px; }
+        /* Home Page Menu Section */
+        .featured-section {
+            padding: 4rem 5%;
+            background: white;
+        }
 
-        /* --- DEALS SECTION --- */
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--mcd-red);
+            margin-bottom: 2rem;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Deals Section */
         .deals {
-            background: var(--mcd-yellow);
-            padding: 60px 10%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .deal-box {
             background: var(--mcd-red);
             color: white;
-            padding: 30px;
-            border-radius: 10px;
-            flex: 1;
-            min-width: 300px;
+            padding: 3rem 5%;
             text-align: center;
-            border: 3px dashed white;
         }
 
-        /* --- LOCATOR --- */
-        .locator {
-            text-align: center;
-            background: var(--mcd-gray);
+        .deals h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
         }
 
-        .locator-form {
-            margin-top: 20px;
+        .deals-container {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 2rem;
+            flex-wrap: wrap;
         }
 
-        .locator-form input {
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+        .deal-card {
+            background: rgba(255,255,255,0.2);
+            padding: 1.5rem;
+            border-radius: 15px;
             width: 250px;
         }
 
-        /* --- FOOTER --- */
-        footer {
-            background: var(--mcd-black);
-            color: white;
-            padding: 50px 10% 20px;
+        .deal-card h3 {
+            font-size: 1.8rem;
+            color: var(--mcd-yellow);
+        }
+
+        /* Store Locator */
+        .locator {
+            padding: 3rem 5%;
             text-align: center;
+            background: #f5f5f5;
+        }
+
+        .locator input {
+            padding: 12px;
+            width: 250px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            margin-right: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: #292929;
+            color: white;
+            text-align: center;
+            padding: 2rem;
         }
 
         .social-icons {
-            margin-bottom: 20px;
-            font-size: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .social-icons a {
             color: white;
-            margin: 0 15px;
-            transition: 0.3s;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            text-decoration: none;
         }
 
-        .social-icons a:hover { color: var(--mcd-yellow); }
+        /* Hidden Class */
+        .hidden {
+            display: none;
+        }
 
-        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            nav { display: none; } /* Simplified for mobile example */
-            .hero h1 { font-size: 2.5rem; }
+            .hero h1 { font-size: 2rem; }
+            .nav-links { gap: 1rem; }
+            .menu-grid { grid-template-columns: 1fr; }
         }
     </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
-    <header>
-        <a href="#" class="logo"><span>M</span>cDonald's</a>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#menu">Menu</a></li>
-                <li><a href="#deals">Deals</a></li>
-                <li><a href="#location">Location</a></li>
-            </ul>
-        </nav>
-    </header>
+<header>
+    <nav>
+        <a href="#" class="logo" onclick="showHome()">M<span>c</span>Donald's</a>
+        <ul class="nav-links">
+            <li><a href="#" onclick="showHome()" id="homeLink" class="active">Home</a></li>
+            <li><a href="#" onclick="showMenu()" id="menuLink">Menu</a></li>
+            <li><a href="#" onclick="scrollToDeals()">Deals</a></li>
+            <li><a href="#" onclick="scrollToLocator()">Location</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <section class="hero" id="home">
+<!-- Home Page -->
+<div id="homePage">
+    <section class="hero">
         <h1>Let's McDonald's</h1>
-        <p style="font-size: 1.2rem; margin-bottom: 2rem;">Delicious moments for everyone.</p>
-        <a href="#menu" class="cta-btn">View Full Menu</a>
+        <p>Delicious moments for everyone. Fresh, Fast, Friendly.</p>
+        <button class="btn" onclick="showMenu()">View Full Menu →</button>
     </section>
 
-    <section class="section-padding" id="menu">
-        <h2 class="section-title">Popular Items</h2>
-        <div class="menu-grid">
-            <div class="card">
-                <span class="card-img">🍔</span>
+    <section class="featured-section">
+        <h2 class="section-title">🔥 Popular Items</h2>
+        <div class="featured-grid">
+            <div class="menu-card">
+                <div class="menu-emoji">🍔</div>
                 <h3>Big Mac</h3>
-                <p>The icon. Two 100% beef patties, special sauce, lettuce, cheese, pickles, and onions.</p>
+                <p>Two beef patties, special sauce, lettuce, cheese, pickles, onions on a sesame seed bun.</p>
+                <span class="price">$5.99</span>
+                <button class="order-btn" onclick="alert('Added to cart!')">Add to Cart</button>
             </div>
-            <div class="card">
-                <span class="card-img">🍟</span>
+            <div class="menu-card">
+                <div class="menu-emoji">🍗</div>
+                <h3>10pc McNuggets</h3>
+                <p>Juicy chicken nuggets with your choice of sauce.</p>
+                <span class="price">$4.99</span>
+                <button class="order-btn" onclick="alert('Added to cart!')">Add to Cart</button>
+            </div>
+            <div class="menu-card">
+                <div class="menu-emoji">🍟</div>
                 <h3>World Famous Fries</h3>
-                <p>Crispy, golden, and salted to perfection. The ultimate sidekick.</p>
-            </div>
-            <div class="card">
-                <span class="card-img">🍗</span>
-                <h3>Chicken McNuggets</h3>
-                <p>Made with 100% white meat chicken. Perfect for dipping.</p>
+                <p>Golden, crispy, salted to perfection.</p>
+                <span class="price">$2.49</span>
+                <button class="order-btn" onclick="alert('Added to cart!')">Add to Cart</button>
             </div>
         </div>
     </section>
 
-    <section class="deals" id="deals">
-        <div class="deal-box">
-            <h2>$1 Off Large Fries</h2>
-            <p>Available only on our App.</p>
-        </div>
-        <div class="deal-box">
-            <h2>Free McNuggets</h2>
-            <p>With your first purchase of $1 or more!</p>
+    <section class="deals" id="dealsSection">
+        <h2>🎉 Today's Special Deals</h2>
+        <div class="deals-container">
+            <div class="deal-card">
+                <h3>$5.99</h3>
+                <p>Big Mac + Fries + Drink</p>
+                <small>Save $3</small>
+            </div>
+            <div class="deal-card">
+                <h3>20pc $7.99</h3>
+                <p>20 Chicken McNuggets</p>
+                <small>Extra sauce included</small>
+            </div>
+            <div class="deal-card">
+                <h3>2for $4</h3>
+                <p>Any Breakfast Sandwich</p>
+                <small>Before 10:30am</small>
+            </div>
         </div>
     </section>
 
-    <section class="section-padding locator" id="location">
-        <h2>Find a McDonald's Near You</h2>
-        <form class="locator-form" id="locatorForm">
-            <input type="text" placeholder="Enter Zip Code" id="zipInput" required>
-            <button type="submit" class="cta-btn" style="padding: 12px 25px;">Search</button>
-        </form>
+    <section class="locator" id="locatorSection">
+        <h2>📍 Find a McDonald's Near You</h2>
+        <input type="text" id="zipCode" placeholder="Enter ZIP code">
+        <button class="btn" onclick="alert('Coming soon to ' + (document.getElementById('zipCode').value || 'your area') + '!')">Search</button>
     </section>
+</div>
 
-    <footer>
-        <div class="social-icons">
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
+<!-- Menu Page (Hidden by default) -->
+<div id="menuPage" class="menu-page hidden">
+    <div class="menu-header">
+        <h1>🍔 Our Full Menu 🍟</h1>
+        <p>Explore all our delicious offerings</p>
+    </div>
+
+    <div class="category-tabs">
+        <button class="tab-btn active" onclick="filterMenu('all')">All</button>
+        <button class="tab-btn" onclick="filterMenu('burgers')">Burgers</button>
+        <button class="tab-btn" onclick="filterMenu('chicken')">Chicken</button>
+        <button class="tab-btn" onclick="filterMenu('sides')">Sides & Drinks</button>
+        <button class="tab-btn" onclick="filterMenu('desserts')">Desserts</button>
+    </div>
+
+    <div class="menu-grid" id="menuGrid">
+        <!-- Burgers -->
+        <div class="menu-card" data-category="burgers">
+            <div class="menu-emoji">🍔</div>
+            <h3>Big Mac</h3>
+            <p>Two patties, special sauce, lettuce, cheese, pickles, onions</p>
+            <span class="price">$5.99</span>
+            <button class="order-btn" onclick="alert('Added Big Mac to cart!')">Order Now</button>
         </div>
-        <p>&copy; 2024 McDonald's Mockup. All Rights Reserved.</p>
-        <p style="font-size: 0.8rem; margin-top: 10px; color: #888;">*Not affiliated with McDonald's Corporation.</p>
-    </footer>
+        <div class="menu-card" data-category="burgers">
+            <div class="menu-emoji">🍔</div>
+            <h3>Quarter Pounder with Cheese</h3>
+            <p>¼ lb beef, cheese, pickles, onions, ketchup, mustard</p>
+            <span class="price">$6.29</span>
+            <button class="order-btn" onclick="alert('Added Quarter Pounder to cart!')">Order Now</button>
+        </div>
+        <div class="menu-card" data-category="burgers">
+            <div class="menu-emoji">🍔</div>
+            <h3>McDouble</h3>
+            <p>Two patties, cheese, pickles, onions, ketchup, mustard</p>
+            <span class="price">$3.49</span>
+            <button class="order-btn" onclick="alert('Added McDouble to cart!')">Order Now</button>
+        </div>
+        <div class="menu-card" data-category="burgers">
+            <div class="menu-emoji">🍔</div>
+            <h3>Cheeseburger</h3>
+            <p>Classic cheeseburger with pickles and onions</p>
+            <span class="price">$2.49</span>
+            <button class="order-btn" onclick="alert('Added Cheeseburger to cart!')">Order Now</button>
+        </div>
 
-    <script>
-        document.getElementById('locatorForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const zip = document.getElementById('zipInput').value;
-            if(zip) {
-                alert("Coming soon to your area! We're expanding fast.");
-                document.getElementById('zipInput').value = '';
+        <!-- Chicken -->
+        <div class="menu-card" data-category="chicken">
+            <div class="menu-emoji">🍗</div>
+            <h3>10pc Chicken McNuggets</h3>
+            <p>Juicy nuggets with choice of sauce</p>
+            <span class="price">$4.99</span>
+            <button class="order-btn" onclick="alert('Added McNuggets to cart!')">Order Now</button>
+        </div>
+        <div class="menu-card" data-category="chicken">
+            <div class="menu-emoji">🐔</div>
+            <h3>McChicken</h3>
+            <p>Crispy chicken with lettuce and mayo</p>
+            <span class="price">$4.29</span>
+            <button class="order-btn" onclick="alert('Added McChicken to cart!')">Order Now</button>
+        </div>
+        <div class="menu-card" data-category="chicken">
+            <div class="menu-emoji">🐔</div>
+            <h3>Spicy McChicken</h3>
+            <p>Spicy crispy chicken with lettuce and mayo</p>
+            <span class="price">$4.49</span>
+            <button class="order-btn" onclick="alert('Added Spicy McChicken to cart!')">Order Now</button>
+        </div>
+
+        <!-- Sides & Drinks -->
+        <div class="menu-card" data-category="sides">
+            <div class="menu-emoji">🍟</div>
+            <h3>World Famous Fries</h3>
+            <p>Golden crispy fries</p>
+            <span class="price">$2.49</span>
+            <button class="order-btn" onclick="alert('Added Fries to cart!')">Order Now</button>
+        </div>
+        <div class="menu-card" data-category="sides">
+            <div class="menu-emoji">🥤</div>
+            <h3>Soft Drink</h3>
+            <p>Coke, Sprite, Fanta, or Dr Pepper</p>
+            <span class="price">$1.99</span>
+            <button class="order-btn" onclick="alert('Added Drink to cart!')">Order Now</button>
+        </div>
+        <div class="menu-card" data-category="sides">
+            <div class="menu-emoji">☕</div>
+            <h3>McCafé Coffee</h3>
+            <p>Freshly brewed premium roast coffee</p>
+            <span class="price">$1.49</span>
+            <button class="order-btn" onclick="alert('Added Coffee to cart!')">Order Now</button>
+        </div>
+
+        <!-- Desserts -->
+        <div class="menu-card" data-category="desserts">
+            <div class="menu-emoji">🍦</div>
+            <h3>McFlurry</h3>
+            <p>Vanilla soft serve with Oreo or M&M's</p>
+            <span class="price">$3.29</span>
+            <button class="order-btn" onclick="alert('Added McFlurry to cart!')">Order Now</button>
+        </div>
+        <div class="menu-card" data-category="desserts">
+            <div class="menu-emoji">🍎</div>
+            <h3>Apple Pie</h3>
+            <p>Warm crispy apple pie</p>
+            <span class="price">$1.99</span>
+            <button class="order-btn" onclick="alert('Added Apple Pie to cart!')">Order Now</button>
+        </div>
+        <div class="menu-card" data-category="desserts">
+            <div class="menu-emoji">🍪</div>
+            <h3>Chocolate Chip Cookie</h3>
+            <p>Freshly baked cookie</p>
+            <span class="price">$0.99</span>
+            <button class="order-btn" onclick="alert('Added Cookie to cart!')">Order Now</button>
+        </div>
+        <div class="menu-card" data-category="desserts">
+            <div class="menu-emoji">🍦</div>
+            <h3>Soft Serve Cone</h3>
+            <p>Classic vanilla cone</p>
+            <span class="price">$1.29</span>
+            <button class="order-btn" onclick="alert('Added Cone to cart!')">Order Now</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+    </div>
+    <p>&copy; 2025 McDonald's. All rights reserved. | 🍔 Delivering happiness</p>
+</footer>
+
+<script>
+    function showHome() {
+        document.getElementById('homePage').classList.remove('hidden');
+        document.getElementById('menuPage').classList.add('hidden');
+        document.getElementById('homeLink').classList.add('active');
+        document.getElementById('menuLink').classList.remove('active');
+        window.scrollTo(0, 0);
+    }
+
+    function showMenu() {
+        document.getElementById('homePage').classList.add('hidden');
+        document.getElementById('menuPage').classList.remove('hidden');
+        document.getElementById('menuLink').classList.add('active');
+        document.getElementById('homeLink').classList.remove('active');
+        window.scrollTo(0, 0);
+        filterMenu('all');
+    }
+
+    function scrollToDeals() {
+        showHome();
+        document.getElementById('dealsSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function scrollToLocator() {
+        showHome();
+        document.getElementById('locatorSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function filterMenu(category) {
+        const cards = document.querySelectorAll('#menuGrid .menu-card');
+        cards.forEach(card => {
+            if (category === 'all' || card.getAttribute('data-category') === category) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
             }
         });
 
-        // Simple smooth scroll for navigation links
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                document.querySelector(targetId).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+        // Update active tab button style
+        const btns = document.querySelectorAll('.tab-btn');
+        btns.forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.innerText.toLowerCase() === category || (category === 'all' && btn.innerText === 'All')) {
+                btn.classList.add('active');
+            }
         });
-    </script>
+    }
+</script>
+
 </body>
 </html>
